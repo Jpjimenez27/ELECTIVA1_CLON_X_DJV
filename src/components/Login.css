@@ -1,0 +1,97 @@
+/* Login.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7); /* Fondo oscuro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background-color: #121212; /* Fondo oscuro */
+  padding: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px; /* Establece un ancho máximo fijo */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  color: white;
+  position: relative; /* Importante para posicionar el botón X */
+}
+
+.close-button {
+  position: absolute;
+  top: 10px; /* Ajuste para colocar el botón en la esquina */
+  right: 10px; /* Cambiado a la esquina derecha */
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro circular */
+  border: none;
+  border-radius: 50%;
+  width: 30px; /* Tamaño más pequeño */
+  height: 30px;
+  color: white;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.close-button:hover {
+  background-color: rgba(0, 0, 0, 0.9); /* Más oscuro al hacer hover */
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: white;
+  text-align: center; /* Centra el título */
+}
+
+.input-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 5px;
+  background: #222;
+  color: white;
+}
+
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+  color: #888;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #1da1f2; /* Color azul de botón */
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #0d8feb; /* Color azul más oscuro en hover */
+}
+
+
