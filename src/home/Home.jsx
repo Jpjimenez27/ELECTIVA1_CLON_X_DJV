@@ -1,8 +1,8 @@
-import logo from './../assets/twitter-logo.svg';
+import logo from './../assets/images/twitter-logo.svg';
 import googleLogo from "./../assets/images/Google_logo.webp";
 import appleLogo from "./../assets/images/appleLogo.png";
 import './home.css'
-import {Modal} from '../components/Modal';
+import { Modal } from '../components/Modal';
 import { useState } from 'react';
 
 export const Home = () => {
@@ -11,14 +11,14 @@ export const Home = () => {
 
   return (
     <div >
-      <main>
+      <main className='home'>
         <div className="home_content container">
           <div className="logo">
             <img src={logo} />
           </div>
           <div className="login_content">
             <h1>Lo que está pasando ahora</h1>
-            <h2 >Únete Hoy</h2>
+            <h2 className='join'>Únete Hoy</h2>
             <div className="buttons">
               <a className="white_button">
                 <div className="content">
@@ -28,7 +28,6 @@ export const Home = () => {
                   <p>Registarse con Google</p>
                 </div>
               </a>
-
               <a className="white_button">
                 <div className="content">
                   <div className="logo">
@@ -60,29 +59,28 @@ export const Home = () => {
 
           <div className="section1">
             <a href="#">Información</a>
-            <a href="#"> Descarga la app de X</a>
-            <a href="#"> Centro de Ayuda</a>
-            <a href="#"> Condiciones de Servicio</a>
-            <a href="#"> Política de Privacidad</a>
-            <a href="#"> Política de cookies  </a>
-            <a href="#">  Accesibilidad</a>
-            <a href="#">  Información de anuncios</a>
-            <a href="#">  Blog</a>
-            <a href="#">  Empleos</a>
-            <a href="#">  Recursos para marcas</a>
-            <a href="#"> Publicidad</a>
+            <a href="#">Descarga la app de X</a>
+            <a href="#">Centro de Ayuda</a>
+            <a href="#">Condiciones de Servicio</a>
+            <a href="#">Política de Privacidad</a>
+            <a href="#">Política de cookies  </a>
+            <a href="#">Accesibilidad</a>
+            <a href="#">Información de anuncios</a>
+            <a href="#">Blog</a>
+            <a href="#">Empleos</a>
+            <a href="#">Recursos para marcas</a>
+            <a href="#">Publicidad</a>
 
           </div>
           <div className="section2">
-            <a href="#">   Marketing</a>
-            <a href="#">  X para empresas</a>
-            <a href="#">  Desarrolladores</a>
-            <a href="#">  Guía</a>
-            <a href="#">  Configuración</a>
-            <a href="#">  © 2024 X Corp.</a>
+            <a href="#">Marketing</a>
+            <a href="#">X para empresas</a>
+            <a href="#">Desarrolladores</a>
+            <a href="#">Guía</a>
+            <a href="#">Configuración</a>
+            <a href="#">© 2024 X Corp.</a>
           </div>
         </footer>
-
       </main>
     </div>
 

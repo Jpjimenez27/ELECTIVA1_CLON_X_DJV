@@ -29,7 +29,10 @@ nav {
     }
 
 }
-
+.main{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
 .main-content{
     color: white;
   

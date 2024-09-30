@@ -1,160 +1,166 @@
-.home_content {
-    display: flex;
-    justify-content: space-evenly;
-
-    color: white;
-    align-items: center;
-    gap: 200px;
-
-    h1 {
-        font-size: 55px;
-    }
-
-    h2 {
-        font-size: 30px;
-    }
-
-    img {
-        max-width: 400px;
-    }
-
-    .buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        .white_button {
-            width: 250px;
-            border-radius: 30px;
-            cursor: pointer;
-            background-color: white;
-        }
-
-        .content {
-            margin: 0 auto;
-
-            padding: 0;
-            text-align: center;
-            height: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
-            width: 200px;
-
-            p {
-                font-size: 12px;
-                color: black;
-            }
-
-            img {
-                width: 15px;
-            }
-
-            .apple_button_text {
-                font-weight: 700;
-            }
-        }
-
-        .separation {
-            width: 50%;
-            gap: 5px;
-            display: flex;
-            align-items: center;
-
-            hr {
-                width: 100%;
-                height: 0.1px;
-            }
-
-            p {
-                font-size: 13px;
-            }
-        }
-
-        .create_account_button,
-        .twitter-button {
-            text-decoration: none;
-            color: white;
-            background-color: #1D9BF0;
-            width: 50%;
-            text-align: center;
-            font-weight: 600;
-            font-size: 14px;
-            padding: 8px 0;
-            border-radius: 25px;
-
-            &:hover {
-                background-color: #1A8CD8;
-            }
-        }
-
-        .signIn_button {
-            color: rgb(78, 105, 245);
-            background-color: #020202;
-            width: 50%;
-            text-align: center;
-            font-weight: 600;
-            font-size: 14px;
-            padding: 8px 0;
-            border-radius: 25px;
-
-            &:hover {
-                background-color: #000000;
-            }
-        }
-
-    }
-
-    .service_terms {
-        width: 50%;
-        color: #717667;
-        font-size: 9px;
-
-        a {
-            color: #1988D3;
-        }
-    }
-
-}
-
-main {
+.home {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-}
+    justify-content: space-around;
+    height: 100vh;
 
-.footer {
-    margin-top: 50px;
-
-    a {
-        text-decoration: none;
-        color: #64686D;
-        font-size: 13px;
-    }
-
-    .section1,
-    .section2 {
+    .home_content {
         display: flex;
-        justify-content: center;
-        gap: 20px;
+        justify-content: space-evenly;
+
+        color: white;
+        align-items: center;
+        gap: 200px;
+
+        h1 {
+            font-size: 55px;
+        }
+
+        h2 {
+            font-size: 30px;
+        }
+
+        img {
+            max-width: 400px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            .white_button {
+                width: 250px;
+                border-radius: 30px;
+                cursor: pointer;
+                background-color: white;
+            }
+
+            .content {
+                margin: 0 auto;
+
+                padding: 0;
+                text-align: center;
+                height: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+                width: 200px;
+
+                p {
+                    font-size: 12px;
+                    color: black;
+                }
+
+                img {
+                    width: 15px;
+                }
+
+                .apple_button_text {
+                    font-weight: 700;
+                }
+            }
+
+            .separation {
+                width: 50%;
+                gap: 5px;
+                display: flex;
+                align-items: center;
+
+                hr {
+                    width: 100%;
+                    height: 0.1px;
+                }
+
+                p {
+                    font-size: 13px;
+                }
+            }
+
+            .create_account_button,
+            .twitter-button {
+                text-decoration: none;
+                color: white;
+                background-color: #1D9BF0;
+                width: 50%;
+                text-align: center;
+                font-weight: 600;
+                font-size: 14px;
+                padding: 8px 0;
+                border-radius: 25px;
+
+                &:hover {
+                    background-color: #1A8CD8;
+                }
+            }
+
+            .signIn_button {
+                color: rgb(78, 105, 245);
+                background-color: #020202;
+                width: 50%;
+                text-align: center;
+                font-weight: 600;
+                font-size: 14px;
+                padding: 8px 0;
+                border-radius: 25px;
+
+                &:hover {
+                    background-color: #000000;
+                }
+            }
+
+        }
+
+        .service_terms {
+            width: 50%;
+            color: #717667;
+            font-size: 9px;
+
+            a {
+                color: #1988D3;
+            }
+        }
+
     }
 
-    .section2 {
-        margin-top: 20px;
+    .footer {
+        margin-top: 50px;
+
+        a {
+            text-decoration: none;
+            color: #64686D;
+            font-size: 13px;
+        }
+
+        .section1,
+        .section2 {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .section2 {
+            margin-top: 20px;
+        }
     }
-}
-.twitter-button{
-    text-decoration: none;
-    color: #1D9BF0;
-    background-color: black;
-    width: 50%;
-    text-align: center;
-    font-weight: 600;
-    font-size: 14px;
-    padding: 8px 0;
-    border-radius: 25px;
-    border: none;
-    border: 0.1px solid white;
-   
+
+    .join {
+        text-align: left;
+    }
+
+    .twitter-button {
+        text-decoration: none;
+        color: #1D9BF0;
+        background-color: black;
+        width: 50%;
+        text-align: center;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 8px 0;
+        border-radius: 25px;
+        border: none;
+        border: 0.1px solid white;
+        cursor: pointer;
+    }
 }

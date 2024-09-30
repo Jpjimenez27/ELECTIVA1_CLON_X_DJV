@@ -1,15 +1,14 @@
-import main from './main.css';
+import   './main.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBarChart, faBars, faBarsStaggered, faHeart, faHouse, faMarker, faMarsStrokeUp, faMessage, faRetweet, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faBarChart, faHeart, faHouse, faMarsStrokeUp, faMessage, faRetweet } from '@fortawesome/free-solid-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import twitterLogo from './../assets/twitter-logo.svg'
-import { faMarkdown } from '@fortawesome/free-brands-svg-icons';
+import twitterLogo from './../assets/images/twitter-logo.svg'
 export const Main = () => {
   return (
-    <main className='container'>
+    <main className='container main'>
       <nav >
         <div className="logo-image">
           <a href=""><img src={twitterLogo} alt="" className='twitter-logo' /></a>
@@ -53,24 +52,24 @@ export const Main = () => {
               </div>
               <div className="buttons">
                 <div className="button">
-                <FontAwesomeIcon icon={faMessage} className='link-icon' />
-                <span>6 mil</span>
+                  <FontAwesomeIcon icon={faMessage} className='link-icon' />
+                  <span>6 mil</span>
                 </div>
                 <div className="button">
-                <FontAwesomeIcon icon={faRetweet} className='link-icon' />
-                <span>56 mil</span>
+                  <FontAwesomeIcon icon={faRetweet} className='link-icon' />
+                  <span>56 mil</span>
                 </div>
                 <div className="button">
-                <FontAwesomeIcon icon={faHeart} className='link-icon' />
-                <span>84 mil</span>
+                  <FontAwesomeIcon icon={faHeart} className='link-icon' />
+                  <span>84 mil</span>
                 </div>
                 <div className="button">
-                <FontAwesomeIcon icon={faBarChart} className='link-icon' />
-                <span>54 M</span>
+                  <FontAwesomeIcon icon={faBarChart} className='link-icon' />
+                  <span>54 M</span>
                 </div>
                 <div className="button">
-                <FontAwesomeIcon icon={faMarsStrokeUp} className='link-icon' />
-             
+                  <FontAwesomeIcon icon={faMarsStrokeUp} className='link-icon' />
+
                 </div>
               </div>
             </div>
