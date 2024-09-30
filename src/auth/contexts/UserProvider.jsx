@@ -2,6 +2,7 @@ import { useReducer, useState } from "react";
 import { UserContext } from "./UserContext";
 import { userReducer } from "../reducers/userReducer"
 import { userTypes } from "../../userTypes";
+import { Navigate } from "react-router-dom";
 
 const initialState = {
     logged: false,
@@ -10,7 +11,6 @@ const initialState = {
 
 export const UserProvider = ({ children }) => {
     const [userState, dispatch] = useReducer(userReducer, initialState);
-
     const loginUser = () => {
         const action = {
             type: userTypes.logIn,
@@ -18,7 +18,9 @@ export const UserProvider = ({ children }) => {
              uid: 1938393
             },
         };
-
+        
+        //localStorage.setItem('user', JSON.stringify(payload));
+      
         dispatch(action);
     };
 

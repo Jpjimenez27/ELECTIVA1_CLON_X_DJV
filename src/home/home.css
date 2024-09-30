@@ -72,7 +72,8 @@
             }
         }
 
-        .create_account_button {
+        .create_account_button,
+        .twitter-button {
             text-decoration: none;
             color: white;
             background-color: #1D9BF0;
@@ -82,7 +83,8 @@
             font-size: 14px;
             padding: 8px 0;
             border-radius: 25px;
-            &:hover{
+
+            &:hover {
                 background-color: #1A8CD8;
             }
         }
@@ -96,19 +98,63 @@
             font-size: 14px;
             padding: 8px 0;
             border-radius: 25px;
-            &:hover{
+
+            &:hover {
                 background-color: #000000;
             }
         }
-       
+
     }
-    .service_terms{
+
+    .service_terms {
         width: 50%;
         color: #717667;
         font-size: 9px;
-        a{
+
+        a {
             color: #1988D3;
         }
     }
-    
+
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.footer {
+    margin-top: 50px;
+
+    a {
+        text-decoration: none;
+        color: #64686D;
+        font-size: 13px;
+    }
+
+    .section1,
+    .section2 {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .section2 {
+        margin-top: 20px;
+    }
+}
+.twitter-button{
+    text-decoration: none;
+    color: #1D9BF0;
+    background-color: black;
+    width: 50%;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 0;
+    border-radius: 25px;
+    border: none;
+    border: 0.1px solid white;
+   
 }
