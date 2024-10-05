@@ -1,13 +1,15 @@
+import './home.css';
 import logo from './../assets/twitter-logo.svg';
 import googleLogo from "./../assets/Google_logo.webp";
 import appleLogo from "./../assets/appleLogo.png";
-import './home.css'
-import Modal from '../components/Modal';
+import LoginModal from '../components/LoginModal';
+import RegisterModal from '../components/RegisterModal';
 import { useState } from 'react';
 
 export const Home = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isRegOpen, setIsRegOpen] = useState(false);
 
   return (
     <div className="container">
@@ -43,7 +45,8 @@ export const Home = () => {
               <p>o</p>
               <hr />
             </div>
-            <a href="" className="create_account_button">Crear cuenta</a>
+            <button className="create_account_button" onClick={() => setIsRegOpen(true)} >Crear cuenta</button>
+            {isRegOpen ? <RegisterModal isOpen={isRegOpen} closeModal={() => setIsRegOpen(false)} /> : <></>}
           </div>
           <p className='service_terms'>Al registrarte, aceptas los <a href="#">Términos de servicio</a> y la <a href="#">Política de privacidad</a>, incluida la política de <a href="#">Uso de Cookies</a>.</p>
           <br />
@@ -51,7 +54,7 @@ export const Home = () => {
             <h3>¿Ya tienes una cuenta?</h3>
             <div>
               <button className='twitter-button' onClick={() => setIsModalOpen(true)} >Iniciar sesión</button>
-              {isModalOpen ? <Modal isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} /> : <></>}
+              {isModalOpen ? <LoginModal isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} /> : <></>}
             </div>
           </div>
         </div>
