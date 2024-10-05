@@ -1,12 +1,15 @@
-import './main.css';
-import { SideBar } from './components/SideBar';
-import {TweetsList} from './pages/TweetsList';
+import   './main.css';
+import { Sidebar } from './Sidebar';
+import { Tweets } from './Tweets';
 
-export const Main = () => (
-  <main className='container main'>
-    <SideBar />
-    <div className="main-content">
-      <TweetsList />
-    </div>
-  </main>
-)
+
+export const Main = () => {
+  return (
+    <main className='container main'>
+      
+      <Sidebar/>
+      <Tweets/>
+      
+    </main>
+  )
+}
