@@ -1,7 +1,7 @@
 import './home.css';
-import logo from './../assets/twitter-logo.svg';
-import googleLogo from "./../assets/Google_logo.webp";
-import appleLogo from "./../assets/appleLogo.png";
+import logo from './../assets/images/twitter-logo.svg';
+import googleLogo from "./../assets/images/Google_logo.webp";
+import appleLogo from "./../assets/images/appleLogo.png";
 import LoginModal from '../components/LoginModal';
 import RegisterModal from '../components/RegisterModal';
 import { useState } from 'react';
@@ -12,7 +12,7 @@ export const Home = () => {
   const [isRegOpen, setIsRegOpen] = useState(false);
 
   return (
-    <div className="container">
+    <div className="container home">
       <main className="home_content">
         <div className="logo">
           <img src={logo} />
