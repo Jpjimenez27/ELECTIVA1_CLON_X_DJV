@@ -1,4 +1,4 @@
-import './Login.css';
+import './modal.css';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { UserContext } from '../auth/contexts/UserContext';
@@ -12,7 +12,7 @@ const initForm = {
   password: ''
 };
 
-export const Modal = ({ isOpen, closeModal }) => {
+export const LoginModal = ({ isOpen, closeModal }) => {
 
 
   const { userState, loginUser, logoutUser } = useContext(UserContext);
@@ -37,21 +37,18 @@ export const Modal = ({ isOpen, closeModal }) => {
     <>
       <div className="modal-overlay">
         <div className="modal-content">
-          <button color='red' onClick={closeModal}>X</button>
-          <h2>Iniciar Sesión</h2>
-          <form>
+        <button className="close-button" onClick={closeModal}>X</button>
+          <h2>Iniciar sesión en X</h2>
+          <form onSubmit={onLogin} >
             <div className="input-group">
               <label htmlFor="email">Correo Electrónico</label>
-              <input type="email" id="email" name="email"
-                value={email} onChange={onInputChange}
-                placeholder="Ingresa tu correo" />
+              <input type="email" id="email" placeholder="Ingresa tu correo" />
             </div>
             <div className="input-group">
               <label htmlFor="password">Contraseña</label>
-              <input type="password" id="password" placeholder="Ingresa tu contraseña" name="password" onChange={onInputChange}
-                value={password}
-              />
+              <input type="password" id="password" placeholder="Ingresa tu contraseña" />
             </div>
+            <br />
             <button type="submit" className="submit-button" onClick={onLogin} >Iniciar Sesión</button>
           </form>
         </div>
