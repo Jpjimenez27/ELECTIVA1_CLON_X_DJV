@@ -4,34 +4,43 @@ nav {
     flex-direction: column;
     align-items: center;
     position: sticky;
+    margin-top: 10px;
     top: 0;
     height: 100vh;
 
     .twitter-logo {
         width: 50px;
+
     }
-    
+
+    .logo-image {
+        width: 100%;
+    }
 
     .links {
         display: flex;
         flex-direction: column;
         gap: 30px;
-        margin-top: 50px;
-        
+        margin-top: 30px;
+
     }
 
     .link {
         display: flex;
         gap: 10px;
-        svg{
+
+        svg {
             font-size: 25px;
             cursor: pointer;
         }
+
         align-items: center;
+
         a {
             color: white;
             text-decoration: none;
-            font-size: 25px;
+            font-size: 20px;
+            cursor: pointer;
         }
 
         .link-icon {
@@ -72,24 +81,115 @@ nav {
     .tweet {
         padding: 10px;
         border: 1px solid #2F3336;
+
         .user-link {
             text-decoration: none;
             color: white;
             font-weight: 900;
+
+
         }
 
         .titles {
             display: flex;
             gap: 5px;
         }
-        .texts{
-            .button{
+
+        .texts {
+            .button {
+                cursor: pointer;
+            }
+
+            .message-button:hover,
+            .view-button:hover,
+            .save-button:hover {
+                color: #1D9BF0;
+                -webkit-box-shadow: 10px 10px 99px 14px rgba(29, 155, 240, 1);
+                -moz-box-shadow: 10px 10px 99px 14px rgba(29, 155, 240, 1);
+                box-shadow: 10px 10px 99px 14px rgba(29, 155, 240, 1);
+            }
+
+            .retweet-button:hover {
+                color: #00BA7C;
+                -webkit-box-shadow: 10px 10px 99px 14px rgba(0, 186, 124, 1);
+                -moz-box-shadow: 10px 10px 99px 14px rgba(0, 186, 124, 1);
+                box-shadow: 10px 10px 99px 14px rgba(0, 186, 124, 1);
+            }
+
+            .heart-button:hover {
+                color: #F91880;
+                -webkit-box-shadow: 10px 10px 99px 14px rgba(249, 24, 128, 1);
+                -moz-box-shadow: 10px 10px 99px 14px rgba(249, 24, 128, 1);
+                box-shadow: 10px 10px 99px 14px rgba(249, 24, 128, 1);
+            }
+
+
+        }
+    }
+
+    .gray-color {
+        color: #4D5154;
+    }
+
+}
+
+.publish-tweet {
+    padding: 10px;
+    margin-top: 40px;
+
+    .text-content {
+        display: flex;
+        gap: 20px;
+
+        img {
+            width: 50px;
+            border-radius: 50%;
+        }
+
+        .publish-content {
+            width: 100%;
+
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .post-button {
+                background-color: #1A8CD8;
+                padding: 5px 10px;
+                border: none;
+                border-radius: 20px;
+                font-size: 20px;
+                color: white;
+                font-weight: 600;
                 cursor: pointer;
             }
         }
+
+        textarea {
+            width: 100%;
+            height: auto;
+
+            background-color: black;
+            color: white;
+            resize: none;
+            border: none;
+            font-size: 22px;
+            outline: none;
+        }
+
+        .icons {
+            color: #1D9BF0;
+            display: flex;
+            gap: 20px;
+
+            .icon {
+                font-size: 20px;
+            }
+        }
     }
-.gray-color{
-    color: #4D5154;
-}
 
 }
