@@ -4,11 +4,16 @@ import { faRetweet, faChartBar, faCalendar, faPhotoFilm, faPhotoVideo, faImage, 
 import { faHeart, faMessage, faBookmark } from '@fortawesome/free-regular-svg-icons';
 import { useEffect, useState, useRef } from 'react';
 import tweetsData from "../../json/tweets.json";
+import { OverlayPanel } from 'primereact/overlaypanel';
+import { Knob } from 'primereact/knob';
 export const TweetsList = () => {
-
+  const op = useRef(null);
   const [tweets, setTweets] = useState([]);
+  const [selectedUser, setSelectecUser] = useState({});
+  const [newTweet, setNewTweet] = useState("");
   const [canLoadTweets, setCanLoadTweets] = useState(true);
   const canLoadTweetsRef = useRef(canLoadTweets);
+  const [value, setValue] = useState(50);
   useEffect(() => {
 
     getTweetsList();
@@ -24,6 +29,12 @@ export const TweetsList = () => {
 
   }
 
+  const handleMouseLeave = () => {
+    if (op.current) {
+      op.current.hide();
+    }
+  };
+
   window.addEventListener("scroll", () => {
 
     if (window.innerHeight + window.scrollY >= (document.body.offsetHeight - 1) && canLoadTweetsRef.current) {
@@ -34,17 +45,42 @@ export const TweetsList = () => {
         setCanLoadTweets(true);
       }, 3000);
     }
-  })
+  });
+
+  const publishTweet = () => {
+    if (newTweet.trim().length==0||newTweet.length >= 280) return;
+    const newPublishTweet = {
+      profileImage: "https://pbs.twimg.com/profile_images/1802082255000473600/ldPO_hwY_400x400.jpg",
+      profileName: "Juan Pérez",
+      userName: "@JuanPerez",
+      content: newTweet,
+      comments: 0,
+      likes: 0,
+      retweets: 0,
+      views: 0
+    }
+    setTweets([newPublishTweet, ...tweets]);
+    setNewTweet("");
+  }
 
   return (
     <>
+      {/* <Knob
+        value={value}
+        onChange={(e) => setValue(e.value)}
+        className="custom-knob"
+      // Aplica la clase personalizada
+      /> */}
       <section className="publish-tweet">
         <div className="text-content">
           <div className="profile-image">
             <img src="https://pbs.twimg.com/profile_images/1802082255000473600/ldPO_hwY_400x400.jpg" alt="" />
           </div>
           <div className="publish-content">
-            <textarea placeholder='¡¿Qué está pasando?!' rows={1}></textarea>
+            <textarea placeholder='¡¿Qué está pasando?!' rows={1} onChange={(e) => {
+              if (e.target.value.length > 10) return;
+              setNewTweet(e.target.value.trim())
+            }} value={newTweet}></textarea>
 
             <div className="buttons">
               <div className="icons">
@@ -55,7 +91,7 @@ export const TweetsList = () => {
                 <FontAwesomeIcon icon={faCalendarAlt} className='icon' />
                 <FontAwesomeIcon icon={faMapMarkerAlt} className='icon' />
               </div>
-              <button className='post-button' disabled>Postear</button>
+              <button className='post-button' onClick={publishTweet}>Postear</button>
             </div>
 
           </div>
@@ -71,8 +107,13 @@ export const TweetsList = () => {
                 </div>
                 <div className="texts">
                   <div className="titles">
-                    <a href="#" className='user-link'>{tweet.profileName}</a>
-                    <span className='user-name gray-color'>{tweet.userName}</span>
+                    <a href="#" className='user-link' onMouseOver={
+
+                      (e) => {
+                        setSelectecUser(tweet);
+                        op.current.toggle(e);
+                      }} >{tweet.profileName}</a>
+                    <span className='user-name gray-color'>{tweet.username}</span>
                     <span className="date gray-color">26 feb. 2023</span>
                   </div>
                   <p className='tweet-content'>{tweet.content}</p>
@@ -106,6 +147,26 @@ export const TweetsList = () => {
         }
 
       </section>
+      <OverlayPanel ref={op} className='overlayContent' onMouseLeave={handleMouseLeave}>
+        <div className="profile-content">
+          <div className="profile-info">
+            <div className="profile-image">
+              <img src={selectedUser.profileImage} alt="" />
+            </div>
+            <h3>{selectedUser.profileName}</h3>
+            <span>{selectedUser.username}</span>
+            <p>Lorem ipsum dolor sit</p>
+          </div>
+          <div className="follow-content">
+            <button className='follow-button'>Seguir</button>
+
+          </div>
+        </div>
+        <div className="following-content">
+          <p><span>197 </span>Siguiendo</p>
+          <p><span>956 </span>Seguidores</p>
+        </div>
+      </OverlayPanel>
     </>
   )
 }

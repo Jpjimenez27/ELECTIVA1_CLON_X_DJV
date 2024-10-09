@@ -8,9 +8,9 @@ export const Main = () => (
   <main className='container main'>
     <SideBar />
     <div className="main-content">
-      {/* <TweetsList /> */}
-      <ProfileView></ProfileView>
-      <ModalFollowers></ModalFollowers>
+      <TweetsList />
+      {/* <ProfileView></ProfileView>
+      <ModalFollowers></ModalFollowers> */}
     </div>
   </main>
 )

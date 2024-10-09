@@ -86,8 +86,6 @@ nav {
             text-decoration: none;
             color: white;
             font-weight: 900;
-
-
         }
 
         .titles {
@@ -122,15 +120,17 @@ nav {
                 -moz-box-shadow: 10px 10px 99px 14px rgba(249, 24, 128, 1);
                 box-shadow: 10px 10px 99px 14px rgba(249, 24, 128, 1);
             }
-
-
         }
+    }
+
+    .tweet:hover {
+        background-color: #080808;
+        cursor: pointer;
     }
 
     .gray-color {
         color: #4D5154;
     }
-
 }
 
 .publish-tweet {
@@ -191,5 +191,56 @@ nav {
             }
         }
     }
+}
 
+.overlayContent {
+    img {
+        width: 50px;
+        border-radius: 50%;
+    }
+
+    padding: 20px;
+    background-color: black;
+    min-height: 200px;
+    min-width: 200px;
+    color: white;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 0px 31px 4px rgba(255, 255, 255, 1);
+    -moz-box-shadow: 0px 0px 31px 4px rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 31px 4px rgba(255, 255, 255, 1);
+
+    .profile-content {
+        display: flex;
+
+        height: auto;
+
+        .profile-info {
+            display: block;
+
+            h3 {
+                margin: 5px 0 10px 0;
+            }
+        }
+    }
+
+    .following-content {
+        display: flex;
+        gap: 20px;
+
+        span {
+            font-weight: 700;
+        }
+    }
+}
+
+.custom-knob .p-knob-range {
+    stroke: white;
+    /* Cambia el color del indicador */
+}
+
+
+
+.custom-knob .p-knob-text {
+    fill: #1D9BF0;
+    /* Cambia el color del texto */
 }
