@@ -1,97 +1,118 @@
-/* Login.css */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.7); /* Fondo oscuro */
+  background: rgba(0, 0, 0, 0.7); 
   display: flex;
-  align-items: center;
+  align-items: center; 
   justify-content: center;
   z-index: 999;
 }
 
+
 .modal-content {
-  background-color: #121212; /* Fondo oscuro */
+  background-color: #121212;
   padding: 2rem;
   border-radius: 10px;
   width: 100%;
-  max-width: 400px; /* Establece un ancho máximo fijo */
+  max-width: 400px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   color: white;
-  position: relative; /* Importante para posicionar el botón X */
+  position: relative; 
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
 }
 
 .close-button {
   position: absolute;
-  top: 10px; /* Ajuste para colocar el botón en la esquina */
-  right: 10px; /* Cambiado a la esquina derecha */
-  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro circular */
+  top: 10px;
+  right: 10px;
+  background-color: rgba(152, 152, 152, 0.7); 
   border: none;
   border-radius: 50%;
-  width: 30px; /* Tamaño más pequeño */
+  width: 30px;
   height: 30px;
-  color: white;
+  color: rgb(255, 255, 255);
   font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: box-shadow 0.3s ease;
 }
 
 .close-button:hover {
-  background-color: rgba(0, 0, 0, 0.9); /* Más oscuro al hacer hover */
+  background-color: rgba(0, 0, 0, 0.9); 
 }
 
 h2 {
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
   color: white;
-  text-align: center; /* Centra el título */
+  text-align: center;
 }
 
 .input-group {
+  width: 100%; 
   margin-bottom: 1rem;
-  text-align: left;
 }
 
 label {
   display: block;
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
+  text-align: left; 
 }
 
 input[type="email"],
-input[type="password"] {
-  width: 100%;
+input[type="password"],
+input[type="text"],
+input[type="date"] {
+  width: 100%; 
   padding: 0.75rem;
   border: none;
   border-radius: 5px;
-  background: #222;
+  background-color: #222;
   color: white;
+  margin-top: 0.5rem;
 }
 
+
 input[type="email"]::placeholder,
-input[type="password"]::placeholder {
+input[type="password"]::placeholder,
+input[type="text"]::placeholder,
+input[type="date"]::placeholder {
   color: #888;
 }
 
 .submit-button {
-  width: 100%;
+  width: 100%; 
   padding: 0.75rem;
   border: none;
   border-radius: 5px;
-  background-color: #1da1f2; /* Color azul de botón */
+  background-color: #1da1f2; 
   color: white;
   font-size: 1rem;
   cursor: pointer;
+  text-align: center; 
   transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
-  background-color: #0d8feb; /* Color azul más oscuro en hover */
+  background-color: #0d8feb; 
 }
 
+.terms-text {
+  font-size: 12px;
+  color: #555;
+  margin-top: 10px;
+  text-align: center;
+}
 
+.terms-text a {
+  color: #1da1f2;
+  text-decoration: none;
+}
