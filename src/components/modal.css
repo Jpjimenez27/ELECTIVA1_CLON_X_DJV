@@ -11,6 +11,7 @@
   z-index: 999;
 }
 
+
 .modal-content {
   background-color: #121212;
   padding: 2rem;
@@ -78,6 +79,7 @@ input[type="date"] {
   color: white;
   margin-top: 0.5rem;
 }
+
 
 input[type="email"]::placeholder,
 input[type="password"]::placeholder,

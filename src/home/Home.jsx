@@ -2,15 +2,15 @@ import './home.css';
 import logo from './../assets/images/twitter-logo.svg';
 import googleLogo from "./../assets/images/Google_logo.webp";
 import appleLogo from "./../assets/images/appleLogo.png";
-import LoginModal from '../components/LoginModal';
-import RegisterModal from '../components/RegisterModal';
+import './home.css'
+import { LoginModal } from '../components/LoginModal';
 import { useState } from 'react';
+import { RegisterModal } from '../components/RegisterModal';
 
 export const Home = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRegOpen, setIsRegOpen] = useState(false);
-
   return (
     <div className="container home">
       <main className="home_content">
@@ -73,13 +73,17 @@ export const Home = () => {
                 <p>o</p>
                 <hr />
               </div>
-              <a href="" className="create_account_button">Crear cuenta</a>
+              <a onClick={() => setIsRegOpen(true)} className="create_account_button">Crear cuenta</a>
+              {isRegOpen ? <RegisterModal isOpen={isRegOpen} closeModal={() => setIsRegOpen(false)} /> : <></>}
             </div>
             <p className='service_terms'>Al registrarte, aceptas los <a href="#">Términos de servicio</a> y la <a href="#">Política de privacidad</a>, incluida la política de <a href="#">Uso de Cookies</a>.</p>
             <br />
             <div>
-              <button className='twitter-button' onClick={() => setIsModalOpen(true)} >Iniciar sesión</button>
-              {isModalOpen ? <LoginModal isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} /> : <></>}
+              <h3>¿Ya tienes una cuenta?</h3>
+              <div>
+                <button className='twitter-button' onClick={() => setIsModalOpen(true)} >Iniciar sesión</button>
+                {isModalOpen ? <LoginModal isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} /> : <></>}
+              </div>
             </div>
           </div>
 
@@ -112,6 +116,8 @@ export const Home = () => {
         </footer>
       </main>
     </div>
+
+
 
   )
 }
