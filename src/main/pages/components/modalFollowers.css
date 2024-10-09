@@ -1,0 +1,81 @@
+.followers-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+   
+  .follower-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+   
+  .follower-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+   
+  .follower-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+   
+  .follower-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+   
+  .follower-username {
+    color: #888;
+  }
+   
+  .follow-button {
+    background-color: #f0f4f7;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+   
+  }
+   
+  .follow-button:hover {
+    background-color: #0d8cd3; /* Efecto hover para el botón */
+  }
+   
+  .text-followers{
+    text-align: left;
+    width: 200px;
+    padding: 10px;
+  }
+   
+  .fixed-header {
+    position: fixed; /* Mantiene el div en su lugar al hacer scroll */
+    top: 0;
+    left: 0;
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    background-color: #f0f0f0; /* Color de fondo claro */
+    padding: 10px; /* Espaciado interno */
+    display: flex; /* Para alinear los elementos dentro del div */
+    align-items: center; /* Centra verticalmente los elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+    z-index: 1000; /* Asegura que el div esté por encima de otros elementos */
+  }
+   
+  .profile-name {
+    margin-left: 10px; /* Espacio entre la flecha y el nombre */
+    font-size: 18px; /* Tamaño de la fuente del nombre */
+  }
+   
+  .content {
+    padding-top: 60px; /* Espacio para el header fijo */
+  }
+.follower-name{
+    color: white;
+}
