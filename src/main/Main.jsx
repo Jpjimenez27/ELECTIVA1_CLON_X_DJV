@@ -1,16 +1,16 @@
-import './main.css';
-import { SideBar } from './components/SideBar';
-import {TweetsList} from './pages/TweetsList';
-import { ProfileView } from './pages/ProfileView';
-import { ModalFollowers } from './pages/components/ModalFollowers';
+import "./main.css";
+import { SideBar } from "./components/SideBar";
+import { ProfileView } from "./pages/ProfileView";
 
 export const Main = () => (
-  <main className='container main'>
+  <main className="container main">
+
     <SideBar />
+
     <div className="main-content">
-      {/* <TweetsList /> */}
+    
       <ProfileView></ProfileView>
-      <ModalFollowers></ModalFollowers>
+
     </div>
   </main>
-)
+);
