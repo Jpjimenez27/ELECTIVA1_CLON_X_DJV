@@ -15,8 +15,6 @@ export const TweetsList = () => {
 
   const [tweetsCounter, setTweetsCounter] = useState(1);
 
-
-
   useEffect(() => {
     getTweetsList();
   }, []);
