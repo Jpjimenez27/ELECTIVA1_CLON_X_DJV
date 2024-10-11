@@ -9,7 +9,7 @@ export const ModalFollowed = ({ isOpen, closeModal }) => {
     setFollowed(followedData);
   }, []);
 
-  if (!isOpen) return null;
+
 
   return (
     <div className="modal-overlay">

@@ -19,6 +19,7 @@ export const ModalFollowers = ({ isOpen, closeModal }) => {
          
           <h2>Who to follow</h2>{" "}
           <button className="close-button" onClick={closeModal}>X</button>
+          
         </div>
 
         <ul className="followers-list">
