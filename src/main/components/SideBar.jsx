@@ -19,7 +19,6 @@ export const SideBar = () => {
                 <Link to={""}>
                     <img src={twitterLogo} alt="" className='twitter-logo' />
                 </Link>
-
             </div>
 
             <div className="links">
@@ -43,8 +42,10 @@ export const SideBar = () => {
                     <span >Comunidades</span>
                 </div>
                 <div className='link'>
-                    <FontAwesomeIcon icon={faUser} className='link-icon' />
-                    <span>Perfil</span>
+                    <Link to={"profile"}>
+                        <FontAwesomeIcon icon={faUser} className='link-icon' />
+                        <span>Perfil</span>
+                    </Link>
                 </div>
                 <div className='link' onClick={logOut}>
                     <FontAwesomeIcon icon={faPowerOff} className='link-icon' />

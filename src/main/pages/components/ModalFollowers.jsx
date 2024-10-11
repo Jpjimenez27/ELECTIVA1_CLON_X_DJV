@@ -5,10 +5,16 @@ import followersData from "./../../../json/followers.json";
 export const ModalFollowers = ({ isOpen, closeModal }) => {
 
   const [followers, setFollowers] = useState([]);
+  const [followersCounter,setFollowersCounter]=useState(1);
   useEffect(() => {
     setFollowers(followersData);
   }, []);
   if (!isOpen) return null;
+
+  const updatetweets = () => {
+    setFollowersCounter(followersCounter + 1);
+
+  }
 
   return (
     <div className="modal-overlay">
@@ -18,7 +24,7 @@ export const ModalFollowers = ({ isOpen, closeModal }) => {
           <button className="close-button" onClick={closeModal}>X</button>
         </div>
         <ul className="followers-list">
-          {followers.map((follower, index) => (
+          {followers.slice(0,followersCounter*5).map((follower, index) => (
             <div key={index} className="follower-item">
               <img
                 src={follower.image}
@@ -34,6 +40,7 @@ export const ModalFollowers = ({ isOpen, closeModal }) => {
               </button>
             </div>
           ))}
+          <button onClick={updatetweets} className='show-tweets-button'>Ver más seguidores</button>
         </ul>
       </div>
     </div>
