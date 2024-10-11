@@ -1,16 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faBell, faUsers, faUser, faMagnifyingGlass, faPowerOff } from '@fortawesome/free-solid-svg-icons';
-import {useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import twitterLogo from './../../assets/images/twitter-logo.svg';
 export const SideBar = () => {
 
     const navigate = useNavigate();
 
- const logOut=()=>{
-    localStorage.removeItem("email");
-    localStorage.removeItem("password");
-    navigate("/", { replace: true });
- }
+    const logOut = () => {
+        localStorage.removeItem("email");
+        localStorage.removeItem("password");
+        navigate("/", { replace: true });
+    }
 
     return (
         <nav className='nav'>
@@ -20,8 +20,11 @@ export const SideBar = () => {
 
             <div className="links">
                 <div className='link'>
-                    <FontAwesomeIcon icon={faHouse} className='link-icon' />
-                    <a href="#">Inicio</a>
+                    <Link to={""}>
+                        <FontAwesomeIcon icon={faHouse} className='link-icon' />
+                        <a href="#">Inicio</a>
+                    </Link>
+
                 </div>
                 <div className='link'>
                     <FontAwesomeIcon icon={faMagnifyingGlass} className='link-icon' />

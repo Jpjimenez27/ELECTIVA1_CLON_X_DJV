@@ -12,8 +12,9 @@ export const TweetsList = () => {
   const [selectedUser, setSelectecUser] = useState({});
   const [newTweet, setNewTweet] = useState("");
   const [canLoadTweets, setCanLoadTweets] = useState(true);
+  const [tweetsCounter, setTweetsCounter] = useState(0);
   const canLoadTweetsRef = useRef(canLoadTweets);
-  const [value, setValue] = useState(50);
+
   useEffect(() => {
 
     getTweetsList();
@@ -37,18 +38,24 @@ export const TweetsList = () => {
 
   window.addEventListener("scroll", () => {
 
-    if (window.innerHeight + window.scrollY >= (document.body.offsetHeight - 1) && canLoadTweetsRef.current) {
-      console.log('Has llegado al final del scroll!');
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight+1000000) {
+     
+console.log("yes");
 
       setCanLoadTweets(false);
+     
+      setTweetsCounter(tweetsCounter+1);
+      console.log(tweetsCounter);
+      
       setTimeout(() => {
+
         setCanLoadTweets(true);
       }, 3000);
     }
   });
 
   const publishTweet = () => {
-    if (newTweet.trim().length==0||newTweet.length >= 280) return;
+    if (newTweet.trim().length == 0 || newTweet.length >= 280) return;
     const newPublishTweet = {
       profileImage: "https://pbs.twimg.com/profile_images/1802082255000473600/ldPO_hwY_400x400.jpg",
       profileName: "Juan Pérez",
@@ -78,8 +85,8 @@ export const TweetsList = () => {
           </div>
           <div className="publish-content">
             <textarea placeholder='¡¿Qué está pasando?!' rows={1} onChange={(e) => {
-              if (e.target.value.length > 10) return;
-              setNewTweet(e.target.value.trim())
+              if (e.target.value.length > 280) return;
+              setNewTweet(e.target.value)
             }} value={newTweet}></textarea>
 
             <div className="buttons">
