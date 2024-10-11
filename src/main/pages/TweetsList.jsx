@@ -12,19 +12,18 @@ export const TweetsList = () => {
   const [tweets, setTweets] = useState([]);
   const [selectedUser, setSelectecUser] = useState({});
   const [newTweet, setNewTweet] = useState("");
-  const [canLoadTweets, setCanLoadTweets] = useState(true);
-  const [tweetsCounter, setTweetsCounter] = useState(0);
-  const canLoadTweetsRef = useRef(canLoadTweets);
 
+  const [tweetsCounter, setTweetsCounter] = useState(1);
+
+
+  
   useEffect(() => {
     getTweetsList();
   }, []);
-  useEffect(() => {
-    // Actualiza el ref cada vez que canLoadTweets cambia
-    canLoadTweetsRef.current = canLoadTweets;
-  }, [canLoadTweets]);
+
   const getTweetsList = () => {
     setTweets(tweetsData);
+  
   }
 
   const handleMouseLeave = () => {
@@ -33,22 +32,10 @@ export const TweetsList = () => {
     }
   };
 
-  window.addEventListener("scroll", () => {
-
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight + 1000000) {
-
-      console.log("yes");
-
-      setCanLoadTweets(false);
-
-      setTweetsCounter(tweetsCounter + 1);
-      console.log(tweetsCounter);
-
-      setTimeout(() => {
-        setCanLoadTweets(true);
-      }, 3000);
-    }
-  });
+  const updatetweets = () => {
+    setTweetsCounter(tweetsCounter + 1);
+    console.log(tweetsCounter);
+  }
 
   const publishTweet = () => {
     if (newTweet.trim().length === 0 || newTweet.length >= 280) return;
@@ -94,7 +81,7 @@ export const TweetsList = () => {
       </section>
       <section className='tweets' style={{ height: '100%', overflowY: 'auto' }}>
         {
-          tweets.map((tweet, index) => {
+          tweets.slice(0,tweetsCounter*10).map((tweet, index) => {
             return <div className="tweet" key={index}>
               <div className="main-content-tweet">
                 <div className="tweet-image">
@@ -103,11 +90,11 @@ export const TweetsList = () => {
                 <div className="texts">
                   <div className="titles">
                     <Link to={"profile"}>
-                      <a href='/#' className='user-link' onMouseOver={
+                      <span  className='user-link' onMouseOver={
                         (e) => {
                           setSelectecUser(tweet);
                           op.current.toggle(e);
-                        }} >{tweet.profileName}</a>
+                        }} >{tweet.profileName}</span>
                     </Link>
                     <span className='user-name gray-color'>{tweet.username}</span>
                     <span className="date gray-color">26 feb. 2023</span>
@@ -139,6 +126,7 @@ export const TweetsList = () => {
             </div>
           })
         }
+        <button onClick={updatetweets} className='show-tweets-button'>Ver más tweets</button>
       </section>
       <OverlayPanel ref={op} className='overlayContent' onMouseLeave={handleMouseLeave}>
         <div className="profile-content">
@@ -147,7 +135,7 @@ export const TweetsList = () => {
               <img src={selectedUser.profileImage} alt="" />
             </div>
             <Link to={"profile"}>
-            <h3>{selectedUser.profileName}</h3>
+              <h3>{selectedUser.profileName}</h3>
             </Link>
             <span>{selectedUser.username}</span>
             <p>Lorem ipsum dolor sit</p>

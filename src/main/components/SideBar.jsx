@@ -14,37 +14,41 @@ export const SideBar = () => {
 
     return (
         <nav className='nav'>
+
             <div className="logo-image">
-                <a href="/#"><img src={twitterLogo} alt="" className='twitter-logo' /></a>
+                <Link to={""}>
+                    <img src={twitterLogo} alt="" className='twitter-logo' />
+                </Link>
+
             </div>
 
             <div className="links">
                 <div className='link'>
                     <Link to={""}>
                         <FontAwesomeIcon icon={faHouse} className='link-icon' />
-                        <a href="/#">Inicio</a>
+                        <span >Inicio</span>
                     </Link>
 
                 </div>
                 <div className='link'>
                     <FontAwesomeIcon icon={faMagnifyingGlass} className='link-icon' />
-                    <a href="/#">Explorar</a>
+                    <span >Explorar</span>
                 </div>
                 <div className='link'>
                     <FontAwesomeIcon icon={faBell} className='link-icon' />
-                    <a href="/#">Notificaiones</a>
+                    <span >Notificaiones</span>
                 </div>
                 <div className='link'>
                     <FontAwesomeIcon icon={faUsers} className='link-icon' />
-                    <a href="/#">Comunidades</a>
+                    <span >Comunidades</span>
                 </div>
                 <div className='link'>
                     <FontAwesomeIcon icon={faUser} className='link-icon' />
-                    <a href="/#">Perfil</a>
+                    <span>Perfil</span>
                 </div>
                 <div className='link' onClick={logOut}>
                     <FontAwesomeIcon icon={faPowerOff} className='link-icon' />
-                    <a href='/#' >Cerrar Sesión</a>
+                    <span>Cerrar Sesión</span>
                 </div>
             </div>
         </nav>

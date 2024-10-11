@@ -4,23 +4,42 @@ import profileData from "../../json/profile.json";
 import { ModalFollowed } from "../pages/components/ModalFollowed";
 import { ModalFollowers } from "../pages/components/ModalFollowers";
 import { Link } from "react-router-dom";
-
+import { faRetweet, faChartBar } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faMessage, faBookmark } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import tweetsData from "../../json/profiletweets.json";
 export const ProfileView = () => {
   const [profile, setProfile] = useState({});
   const [isFollowersOpen, setIsFollowersOpen] = useState(false);
   const [isFollowedOpen, setIsFollowedOpen] = useState(false);
+  const [tweets,setTweets]=useState([]);
+  const [tweetsCounter, setTweetsCounter] = useState(1);
+
   useEffect(() => {
-    setProfile(profileData);
+    getTweetsList();
   }, []);
+
+  const getTweetsList = () => {
+    setTweets(tweetsData);
+  
+  }
+
+  useEffect(() => {
+    console.log("Modal state changed: ", isFollowedOpen);
+  }, [isFollowedOpen]);
+  const updatetweets = () => {
+    setTweetsCounter(tweetsCounter + 1);
+    console.log(tweetsCounter);
+  }
 
   return (
     <>
       <div className="profile-container">
         <div className="header-static">
-        <Link to={"/home"}>
-          <button className="back-button" href="/home">
-            ←
-          </button>
+          <Link to={"/home"}>
+            <button className="back-button" href="/home">
+              ←
+            </button>
           </Link>
           <div className="post-name">
             <h2 className="name-profile">{profile.name}Cristiano Ronaldo</h2>
@@ -65,15 +84,16 @@ export const ProfileView = () => {
 
 
         <div className="follow-info">
-          <a  onClick={() => setIsFollowedOpen(true)} className="following">
+          <a onClick={() => setIsFollowedOpen(true)} className="following">
             {profile.following}4.564 Seguidos
             {isFollowedOpen ? (
               <ModalFollowed
                 isOpen={isFollowedOpen}
                 closeModal={() => {
-                  alert(isFollowedOpen)
-                  setIsFollowedOpen(false)
-                  alert(isFollowedOpen)
+                  setTimeout(() => {
+                    setIsFollowedOpen(false);
+                    console.log(isFollowedOpen);
+                  }, 1);
                 }}
               />
             ) : (
@@ -82,12 +102,16 @@ export const ProfileView = () => {
           </a>
 
           {/* Modal para "Seguidores" */}
-          <a  onClick={() => setIsFollowersOpen(true)} className="following">
+          <a onClick={() => setIsFollowersOpen(true)} className="following">
             {profile.followers} 567 Seguidores
             {isFollowersOpen ? (
               <ModalFollowers
                 isOpen={isFollowersOpen}
-                closeModal={() => setIsFollowersOpen(false)}
+                closeModal={() => {
+                  setTimeout(() => {
+                    setIsFollowersOpen(false)
+                  }, 1);
+                }}
               />
             ) : (
               <></>
@@ -100,6 +124,53 @@ export const ProfileView = () => {
           Ninguna de las cuentas que sigues sigue a este usuario
         </div>
       </div>
+      
+      <section className='tweets tweets-profile' style={{ height: '100%', overflowY: 'auto' }}>
+        {
+          tweets.slice(0,tweetsCounter*10).map((tweet, index) => {
+            return <div className="tweet" key={index}>
+              <div className="main-content-tweet">
+                <div className="tweet-image">
+                  <img src={tweet.profileImage} alt={tweet.userName} className='tweet-profile-image' />
+                </div>
+                <div className="texts">
+                  <div className="titles">
+                    <Link to={"profile"}>
+                      <span  className='user-link'>{tweet.profileName}</span>
+                    </Link>
+                    <span className='user-name gray-color'>{tweet.username}</span>
+                    <span className="date gray-color">26 feb. 2023</span>
+                  </div>
+                  <p className='tweet-content'>{tweet.content}</p>
+                  <div className="buttons">
+                    <div className="button message-button">
+                      <FontAwesomeIcon icon={faMessage} className='link-icon' />
+                      <span>{tweet.comments}</span>
+                    </div>
+                    <div className="button retweet-button">
+                      <FontAwesomeIcon icon={faRetweet} className='link-icon' />
+                      <span>{tweet.retweets}</span>
+                    </div>
+                    <div className="button heart-button">
+                      <FontAwesomeIcon icon={faHeart} className='link-icon' />
+                      <span>{tweet.likes}</span>
+                    </div>
+                    <div className="button view-button">
+                      <FontAwesomeIcon icon={faChartBar} className='link-icon' />
+                      <span>{tweet.views}</span>
+                    </div>
+                    <div className="button save-button">
+                      <FontAwesomeIcon icon={faBookmark} className='link-icon' />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          })
+        }
+        <button onClick={updatetweets} className='show-tweets-button'>Ver más tweets</button>
+      </section>
+      
     </>
   );
 };

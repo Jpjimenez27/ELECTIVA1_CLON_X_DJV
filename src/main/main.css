@@ -36,7 +36,7 @@ nav {
 
         align-items: center;
 
-        a {
+        span {
             color: white;
             text-decoration: none;
             font-size: 20px;
@@ -244,7 +244,22 @@ nav {
     fill: #1D9BF0;
     /* Cambia el color del texto */
 }
-a{
+
+a {
     text-decoration: none;
     color: white;
+}
+
+.show-tweets-button {
+    background-color: black;
+    color: #1D9BF0;
+    width: 100%;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 700;
+
+    &:hover {
+        background-color: #080808;
+    }
 }
