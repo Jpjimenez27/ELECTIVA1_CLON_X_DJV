@@ -28,6 +28,7 @@ export const AppRouter = () => {
             }
           >
             <Route path="" element={<TweetsList />} />
+            <Route path="user/:user" element={<ProfileView />} />
             <Route path="profile" element={<ProfileView />} />
             <Route path="*" element={<Navigate to="" />} />
           </Route>

@@ -24,11 +24,9 @@ export const ProfileView = () => {
   }
 
   useEffect(() => {
-    console.log("Modal state changed: ", isFollowedOpen);
   }, [isFollowedOpen]);
   const updatetweets = () => {
     setTweetsCounter(tweetsCounter + 1);
-    console.log(tweetsCounter);
   }
 
   return (
@@ -91,7 +89,6 @@ export const ProfileView = () => {
                 closeModal={() => {
                   setTimeout(() => {
                     setIsFollowedOpen(false);
-                    console.log(isFollowedOpen);
                   }, 1);
                 }}
               />

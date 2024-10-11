@@ -16,14 +16,14 @@ export const TweetsList = () => {
   const [tweetsCounter, setTweetsCounter] = useState(1);
 
 
-  
+
   useEffect(() => {
     getTweetsList();
   }, []);
 
   const getTweetsList = () => {
     setTweets(tweetsData);
-  
+
   }
 
   const handleMouseLeave = () => {
@@ -34,7 +34,6 @@ export const TweetsList = () => {
 
   const updatetweets = () => {
     setTweetsCounter(tweetsCounter + 1);
-    console.log(tweetsCounter);
   }
 
   const publishTweet = () => {
@@ -81,16 +80,17 @@ export const TweetsList = () => {
       </section>
       <section className='tweets' style={{ height: '100%', overflowY: 'auto' }}>
         {
-          tweets.slice(0,tweetsCounter*10).map((tweet, index) => {
+
+          tweets.slice(0, tweetsCounter * 10).map((tweet, index) => {
             return <div className="tweet" key={index}>
               <div className="main-content-tweet">
                 <div className="tweet-image">
-                  <img src={tweet.profileImage} alt={tweet.userName} className='tweet-profile-image' />
+                  <img src={tweet.profileImage} alt={tweet.username} className='tweet-profile-image' />
                 </div>
                 <div className="texts">
                   <div className="titles">
-                    <Link to={"profile"}>
-                      <span  className='user-link' onMouseOver={
+                    <Link to={`user/${tweet.username}`}>
+                      <span className='user-link' onMouseOver={
                         (e) => {
                           setSelectecUser(tweet);
                           op.current.toggle(e);
@@ -134,7 +134,7 @@ export const TweetsList = () => {
             <div className="profile-image">
               <img src={selectedUser.profileImage} alt="" />
             </div>
-            <Link to={"profile"}>
+            <Link to={`user/${selectedUser.username}`}>
               <h3>{selectedUser.profileName}</h3>
             </Link>
             <span>{selectedUser.username}</span>

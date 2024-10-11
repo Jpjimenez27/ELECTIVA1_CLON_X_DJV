@@ -4,10 +4,14 @@ import followedData from "../../../json/followed.json";
 
 export const ModalFollowed = ({ isOpen, closeModal }) => {
   const [followed, setFollowed] = useState([]);
-
+  const [followedCounter, setFollowedCounter] = useState(1);
   useEffect(() => {
     setFollowed(followedData);
   }, []);
+
+  const updatetweets = () => {
+    setFollowedCounter(followedCounter + 1);
+  }
 
   return (
     <div className="modal-overlay">
@@ -20,7 +24,7 @@ export const ModalFollowed = ({ isOpen, closeModal }) => {
           </button>
         </div>
         <ul className="followers-list">
-          {followed.map((followed, index) => (
+          {followed.slice(0, followedCounter * 5).map((followed, index) => (
             <div key={index} className="follower-item">
               <img
                 src={followed.image}
@@ -37,6 +41,7 @@ export const ModalFollowed = ({ isOpen, closeModal }) => {
               </button>
             </div>
           ))}
+          <button onClick={updatetweets} className='show-tweets-button'>Ver más seguidos</button>
         </ul>
       </div>
     </div>
