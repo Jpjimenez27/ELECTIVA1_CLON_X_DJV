@@ -12,7 +12,7 @@ export const ProfileView = () => {
   const [profile, setProfile] = useState({});
   const [isFollowersOpen, setIsFollowersOpen] = useState(false);
   const [isFollowedOpen, setIsFollowedOpen] = useState(false);
-  const [tweets,setTweets]=useState([]);
+  const [tweets, setTweets] = useState([]);
   const [tweetsCounter, setTweetsCounter] = useState(1);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export const ProfileView = () => {
 
   const getTweetsList = () => {
     setTweets(tweetsData);
-  
+
   }
 
   useEffect(() => {
@@ -124,10 +124,10 @@ export const ProfileView = () => {
           Ninguna de las cuentas que sigues sigue a este usuario
         </div>
       </div>
-      
+
       <section className='tweets tweets-profile' style={{ height: '100%', overflowY: 'auto' }}>
         {
-          tweets.slice(0,tweetsCounter*10).map((tweet, index) => {
+          tweets.slice(0, tweetsCounter * 10).map((tweet, index) => {
             return <div className="tweet" key={index}>
               <div className="main-content-tweet">
                 <div className="tweet-image">
@@ -135,9 +135,7 @@ export const ProfileView = () => {
                 </div>
                 <div className="texts">
                   <div className="titles">
-                    <Link to={"profile"}>
-                      <span  className='user-link'>{tweet.profileName}</span>
-                    </Link>
+                    <span className='user-link'>{tweet.profileName}</span>
                     <span className='user-name gray-color'>{tweet.username}</span>
                     <span className="date gray-color">26 feb. 2023</span>
                   </div>
@@ -170,7 +168,7 @@ export const ProfileView = () => {
         }
         <button onClick={updatetweets} className='show-tweets-button'>Ver más tweets</button>
       </section>
-      
+
     </>
   );
 };
