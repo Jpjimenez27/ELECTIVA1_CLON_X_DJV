@@ -1,48 +1,26 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { FirebaseAuth } from "./config";
+import { createContext, useContext } from "react";
 
-export const registerUser = async ({ email, password, displayName }) => {
-  console.log(email, password);
-  try {
-    const resp = await createUserWithEmailAndPassword(FirebaseAuth, email, password);
+const AuthContext = createContext()
 
-    const { uid, photoURL } = resp.user
+export const useAuth = () => {
+   const context = useContext(AuthContext)
+   if (!context) throw new Error('Error in the auth provider')
+   return context
+};
 
-    await updateProfile(FirebaseAuth.currentUser, { displayName });
+export function AuthProvider ({children}) {
 
-    return {
-      ok: true,
-      uid, photoURL, email, displayName
-    }
+const signup = (email, password) => 
+    createUserWithEmailAndPassword(FirebaseAuth, email, password);
 
-  } catch (error) {
-    return {
-      ok: false,
-      errorMessage: error.message
-    }
-  }
+const login = (email, password) =>  
+    signInWithEmailAndPassword(FirebaseAuth, email, password);
+
+    return (
+        <AuthContext.Provider value={{signup, login}} >
+         {children}
+        </AuthContext.Provider>
+    );
 }
-
-export const signInUser = async (email, password) => {
-
-  try {
-    const result = await signInWithEmailAndPassword(FirebaseAuth, email, password);
-
-    const { uid, photoURL, displayName } = result.user
-
-    return {
-      ok: true,
-      displayName, email, photoURL, uid
-    }
-
-  } catch (error) {
-    return {
-      ok: false,
-      errorMessage: error.message
-    }
-  }
-}
-
-export const logoutUser = async () => {
-  return await FirebaseAuth.signOut();
-}   
