@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./profileView.css";
-import profileData from "../../json/profile.json";
 import { ModalFollowed } from "../pages/components/ModalFollowed";
 import { ModalFollowers } from "../pages/components/ModalFollowers";
 import { Link } from "react-router-dom";
