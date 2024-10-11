@@ -1,4 +1,3 @@
-import './home.css';
 import logo from './../assets/images/twitter-logo.svg';
 import googleLogo from "./../assets/images/Google_logo.webp";
 import appleLogo from "./../assets/images/appleLogo.png";
@@ -12,41 +11,11 @@ export const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRegOpen, setIsRegOpen] = useState(false);
   return (
-    <div className="container home">
-      <main className="home_content">
-        <div className="logo">
-          <img src={logo} />
-        </div>
-        <div className="login_content">
-          <h1>Lo que está pasando ahora</h1>
-          <h2>Únete Hoy</h2>
-          <div className="buttons">
-            <a className="white_button">
-              <div className="content">
-                <div className="logo">
-                  <img src={googleLogo} alt="" />
-                </div>
-                <p>Registarse con Google</p>
-              </div>
-
-
-            </a>
-
-            <a className="white_button">
-              <div className="content">
-                <div className="logo">
-                  <img src={appleLogo} alt="" />
-                </div>
-                <p className='apple_button_text'>Registarse con Apple</p>
-              </div>
-            </a>
-            <div className="separation">
-              <hr />
-              <p>o</p>
-              <hr />
-            </div>
-            <button className="create_account_button" onClick={() => setIsRegOpen(true)} >Crear cuenta</button>
-            {isRegOpen ? <RegisterModal isOpen={isRegOpen} closeModal={() => setIsRegOpen(false)} /> : <></>}
+    <div >
+      <main className='home'>
+        <div className="home_content container">
+          <div className="logo">
+            <img src={logo} />
           </div>
           <div className="login_content">
             <h1>Lo que está pasando ahora</h1>

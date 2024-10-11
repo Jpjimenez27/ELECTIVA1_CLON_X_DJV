@@ -52,7 +52,6 @@ export const TweetsList = () => {
     setNewTweet("");
   }
 
-  
   return (
     <>
       <section className="publish-tweet">
