@@ -12,7 +12,12 @@ export const RegisterModal = ({ isOpen, closeModal }) => {
                 <label htmlFor="name">Nombre</label>
                 <input type="text" id="name" placeholder="Ingresa tu nombre" />
               </div>
-              
+
+              <div className="input-group">
+                <label htmlFor="user">Nombre de usuario</label>
+                <input type="text" id="user" placeholder="Ingresa tu nombre de usuario" />
+              </div>
+
               <div className="input-group">
                 <label htmlFor="email">Correo Electrónico</label>
                 <input type="email" id="email" placeholder="Ingresa tu correo" />
