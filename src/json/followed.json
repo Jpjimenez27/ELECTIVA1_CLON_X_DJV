@@ -1,0 +1,162 @@
+[
+    {
+      "name": "Roberto Perez",
+      "username": "@FiscaliaCol",
+      "description": "Cuenta oficial de la Fiscalía General de la Nación. Fiscal General de la Nación, Luz Adriana Camargo Garzón.",
+      "image": "https://randomuser.me/api/portraits/med/lego/1.jpg",
+      "verified": true,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "180° || Reflexiones",
+      "username": "@180Grado5",
+      "description": "Sanar, Aprender, Crecer y Seguir✨ Para consulta de ayuda terapéutica escribe por Mensaje Directo ✉️🧠",
+      "image": "https://randomuser.me/api/portraits/med/lego/2.jpg",
+      "verified": true,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "Samsung Colombia",
+      "username": "@SamsungCO",
+      "description": "Disfruta de lo mejor de Samsung. Si tienes preguntas, te ayudamos en el #726. Política de protección de datos aquí: bit.ly/2iqMELF",
+      "image": "https://randomuser.me/api/portraits/med/lego/3.jpg",
+      "verified": true,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "Servicio Geológico Colombiano",
+      "username": "@sgcol",
+      "description": "Investigación del subsuelo para el beneficio de las personas.",
+      "image": "https://randomuser.me/api/portraits/med/lego/4.jpg",
+      "verified": true,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "EL GRAN DESPERTAR",
+      "username": "@destapandolose1",
+      "description": "Kissinger, Gates y Rockefeller son bien intencionados nunca han ocultado su deseo de reducir la población mundial a través de la vacunación. #patriot #patriota",
+      "image": "https://randomuser.me/api/portraits/med/lego/5.jpg",
+      "verified": false,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "Procuraduría General de la Nación",
+      "username": "@PGN_COL",
+      "description": "🇨🇴 | Procuradora General: #MargaritaCabello ¡Trabajamos para ustedes!",
+      "image": "https://randomuser.me/api/portraits/med/lego/6.jpg",
+      "verified": true,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "Ministerio de Salud",
+      "username": "@MinSaludCol",
+      "description": "Información oficial del Ministerio de Salud y Protección Social de Colombia.",
+      "image": "https://randomuser.me/api/portraits/med/lego/7.jpg",
+      "verified": true,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "Alcaldía de Medellín",
+      "username": "@AlcaldiadeMed",
+      "description": "Noticias y eventos oficiales de la Alcaldía de Medellín.",
+      "image": "https://randomuser.me/api/portraits/med/lego/8.jpg",
+      "verified": true,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "Biblioteca Nacional",
+      "username": "@BiblioNacCol",
+      "description": "Promoción de la lectura y acceso a los recursos literarios en Colombia.",
+      "image": "https://randomuser.me/api/portraits/med/lego/9.jpg",
+      "verified": true,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "Ecología en Acción",
+      "username": "@EcoAccion",
+      "description": "Organización sin fines de lucro dedicada a la preservación del medio ambiente.",
+      "image": "https://randomuser.me/api/portraits/med/lego/3.jpg",
+      "verified": false,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "Deportes Tolima",
+      "username": "@CDTolima",
+      "description": "Cuenta oficial del Club Deportes Tolima, un sentimiento que no se detiene.",
+      "image": "https://randomuser.me/api/portraits/med/lego/4.jpg",
+      "verified": true,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "Fundación para el Progreso",
+      "username": "@FPPprogreso",
+      "description": "Impulsando el desarrollo y la educación en comunidades vulnerables.",
+      "image": "https://randomuser.me/api/portraits/med/lego/1.jpg",
+      "verified": false,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "Museo del Oro",
+      "username": "@MuseoOroCol",
+      "description": "Descubre las riquezas del pasado en el Museo del Oro de Bogotá.",
+      "image": "https://randomuser.me/api/portraits/med/lego/7.jpg",
+      "verified": true,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "Policía Nacional de Colombia",
+      "username": "@PoliciaColombia",
+      "description": "Cuenta oficial de la Policía Nacional, protegiendo y sirviendo a la comunidad.",
+      "image": "https://randomuser.me/api/portraits/med/lego/1.jpg",
+      "verified": true,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "Tech Innovadores",
+      "username": "@TechInnovCO",
+      "description": "Explora las últimas tendencias y avances en tecnología en Colombia.",
+      "image": "https://randomuser.me/api/portraits/med/lego/3.jpg",
+      "verified": false,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "Universidad Nacional",
+      "username": "@UNColombia",
+      "description": "Cuenta oficial de la Universidad Nacional de Colombia. Excelencia en educación superior.",
+      "image": "https://randomuser.me/api/portraits/women/14.jpg",
+      "verified": true,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "Banco de la República",
+      "username": "@BancoRepublica",
+      "description": "El banco central de Colombia, comprometido con la estabilidad económica.",
+      "image": "https://randomuser.me/api/portraits/women/13.jpg",
+      "verified": true,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "Fútbol Total Colombia",
+      "username": "@FutbolTotalCO",
+      "description": "Toda la emoción del fútbol colombiano y los mejores análisis de la liga.",
+      "image": "https://randomuser.me/api/portraits/women/12.jpg",
+      "verified": false,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "Comunidad Científica",
+      "username": "@CienciaCO",
+      "description": "Promoviendo la ciencia y el conocimiento en el país.",
+      "image": "https://randomuser.me/api/portraits/women/10.jpg",
+      "verified": false,
+      "follow_status": "Seguiendo"
+    },
+    {
+      "name": "Defensoría del Pueblo",
+      "username": "@DefensoriaCol",
+      "description": "Defendemos los derechos humanos en Colombia.",
+      "image": "https://randomuser.me/api/portraits/women/9.jpg",
+      "verified": true,
+      "follow_status": "Seguiendo"
+    }
+  ]

@@ -1,15 +1,13 @@
-import   './main.css';
-import { Sidebar } from './Sidebar';
-import { Tweets } from './Tweets';
+import './main.css';
+import { SideBar } from './components/SideBar';
+import {  Outlet } from 'react-router-dom';
+import "./main.css";
 
-
-export const Main = () => {
-  return (
-    <main className='container main'>
-      
-      <Sidebar/>
-      <Tweets/>
-      
-    </main>
-  )
-}
+export const Main = () => (
+  <main className="container main">
+    <SideBar />
+    <div className="main-content">
+    <Outlet />
+    </div>
+  </main>
+);

@@ -12,7 +12,12 @@ export const RegisterModal = ({ isOpen, closeModal }) => {
                 <label htmlFor="name">Nombre</label>
                 <input type="text" id="name" placeholder="Ingresa tu nombre" />
               </div>
-              
+
+              <div className="input-group">
+                <label htmlFor="user">Nombre de usuario</label>
+                <input type="text" id="user" placeholder="Ingresa tu nombre de usuario" />
+              </div>
+
               <div className="input-group">
                 <label htmlFor="email">Correo Electrónico</label>
                 <input type="email" id="email" placeholder="Ingresa tu correo" />
@@ -31,7 +36,7 @@ export const RegisterModal = ({ isOpen, closeModal }) => {
               <button type="submit" className="submit-button">Registrarse</button>
             </form>
             <p className="terms-text">
-              Al registrarte, aceptas nuestros <a href="#">Términos de servicio</a> y la <a href="#">Política de privacidad</a>.
+              Al registrarte, aceptas nuestros <a href="/#">Términos de servicio</a> y la <a href="/#">Política de privacidad</a>.
             </p>
           </div>
         </div>

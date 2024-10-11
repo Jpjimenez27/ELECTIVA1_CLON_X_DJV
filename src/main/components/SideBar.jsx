@@ -1,47 +1,55 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faBell, faUsers, faUser, faMagnifyingGlass, faPowerOff } from '@fortawesome/free-solid-svg-icons';
-import {useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import twitterLogo from './../../assets/images/twitter-logo.svg';
 export const SideBar = () => {
 
     const navigate = useNavigate();
 
- const logOut=()=>{
-    localStorage.removeItem("email");
-    localStorage.removeItem("password");
-    navigate("/", { replace: true });
- }
+    const logOut = () => {
+        localStorage.removeItem("email");
+        localStorage.removeItem("password");
+        navigate("/", { replace: true });
+    }
 
     return (
         <nav className='nav'>
+
             <div className="logo-image">
-                <a href=""><img src={twitterLogo} alt="" className='twitter-logo' /></a>
+                <Link to={""}>
+                    <img src={twitterLogo} alt="" className='twitter-logo' />
+                </Link>
             </div>
 
             <div className="links">
                 <div className='link'>
-                    <FontAwesomeIcon icon={faHouse} className='link-icon' />
-                    <a href="#">Inicio</a>
+                    <Link to={""}>
+                        <FontAwesomeIcon icon={faHouse} className='link-icon' />
+                        <span >Inicio</span>
+                    </Link>
+
                 </div>
                 <div className='link'>
                     <FontAwesomeIcon icon={faMagnifyingGlass} className='link-icon' />
-                    <a href="#">Explorar</a>
+                    <span >Explorar</span>
                 </div>
                 <div className='link'>
                     <FontAwesomeIcon icon={faBell} className='link-icon' />
-                    <a href="#">Notificaiones</a>
+                    <span >Notificaiones</span>
                 </div>
                 <div className='link'>
                     <FontAwesomeIcon icon={faUsers} className='link-icon' />
-                    <a href="#">Comunidades</a>
+                    <span >Comunidades</span>
                 </div>
                 <div className='link'>
-                    <FontAwesomeIcon icon={faUser} className='link-icon' />
-                    <a href="#">Perfil</a>
+                    <Link to={"profile"}>
+                        <FontAwesomeIcon icon={faUser} className='link-icon' />
+                        <span>Perfil</span>
+                    </Link>
                 </div>
                 <div className='link' onClick={logOut}>
                     <FontAwesomeIcon icon={faPowerOff} className='link-icon' />
-                    <a >Cerrar Sesión</a>
+                    <span>Cerrar Sesión</span>
                 </div>
             </div>
         </nav>
