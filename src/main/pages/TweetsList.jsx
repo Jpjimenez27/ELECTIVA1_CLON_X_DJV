@@ -1,11 +1,12 @@
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRetweet, faChartBar, faCalendar, faPhotoFilm, faPhotoVideo, faImage, faFileImage, faGift, faPoll, faSmile, faCalendarAlt, faMapMarkedAlt, faMapMarker, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faRetweet, faChartBar, faImage, faFileImage, faPoll, faSmile, faCalendarAlt, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { faHeart, faMessage, faBookmark } from '@fortawesome/free-regular-svg-icons';
 import { useEffect, useState, useRef } from 'react';
 import tweetsData from "../../json/tweets.json";
 import { OverlayPanel } from 'primereact/overlaypanel';
-import { Knob } from 'primereact/knob';
+import profilePhoto from './../../assets/images/santiagoPhoto.png'
+import { Link } from 'react-router-dom';
 export const TweetsList = () => {
   const op = useRef(null);
   const [tweets, setTweets] = useState([]);
@@ -16,7 +17,6 @@ export const TweetsList = () => {
   const canLoadTweetsRef = useRef(canLoadTweets);
 
   useEffect(() => {
-
     getTweetsList();
   }, []);
   useEffect(() => {
@@ -24,10 +24,7 @@ export const TweetsList = () => {
     canLoadTweetsRef.current = canLoadTweets;
   }, [canLoadTweets]);
   const getTweetsList = () => {
-
     setTweets(tweetsData);
-    console.log(tweets);
-
   }
 
   const handleMouseLeave = () => {
@@ -38,28 +35,27 @@ export const TweetsList = () => {
 
   window.addEventListener("scroll", () => {
 
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight+1000000) {
-     
-console.log("yes");
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight + 1000000) {
+
+      console.log("yes");
 
       setCanLoadTweets(false);
-     
-      setTweetsCounter(tweetsCounter+1);
-      console.log(tweetsCounter);
-      
-      setTimeout(() => {
 
+      setTweetsCounter(tweetsCounter + 1);
+      console.log(tweetsCounter);
+
+      setTimeout(() => {
         setCanLoadTweets(true);
       }, 3000);
     }
   });
 
   const publishTweet = () => {
-    if (newTweet.trim().length == 0 || newTweet.length >= 280) return;
+    if (newTweet.trim().length === 0 || newTweet.length >= 280) return;
     const newPublishTweet = {
-      profileImage: "https://pbs.twimg.com/profile_images/1802082255000473600/ldPO_hwY_400x400.jpg",
-      profileName: "Juan Pérez",
-      userName: "@JuanPerez",
+      profileImage: profilePhoto,
+      profileName: "Santiago Osorio",
+      username: "@santiosiuwu",
       content: newTweet,
       comments: 0,
       likes: 0,
@@ -72,23 +68,16 @@ console.log("yes");
 
   return (
     <>
-      {/* <Knob
-        value={value}
-        onChange={(e) => setValue(e.value)}
-        className="custom-knob"
-      // Aplica la clase personalizada
-      /> */}
       <section className="publish-tweet">
         <div className="text-content">
           <div className="profile-image">
-            <img src="https://pbs.twimg.com/profile_images/1802082255000473600/ldPO_hwY_400x400.jpg" alt="" />
+            <img src={profilePhoto} alt="" />
           </div>
           <div className="publish-content">
             <textarea placeholder='¡¿Qué está pasando?!' rows={1} onChange={(e) => {
               if (e.target.value.length > 280) return;
               setNewTweet(e.target.value)
             }} value={newTweet}></textarea>
-
             <div className="buttons">
               <div className="icons">
                 <FontAwesomeIcon icon={faImage} className='icon' />
@@ -100,7 +89,6 @@ console.log("yes");
               </div>
               <button className='post-button' onClick={publishTweet}>Postear</button>
             </div>
-
           </div>
         </div>
       </section>
@@ -114,12 +102,13 @@ console.log("yes");
                 </div>
                 <div className="texts">
                   <div className="titles">
-                    <a href="#" className='user-link' onMouseOver={
-
-                      (e) => {
-                        setSelectecUser(tweet);
-                        op.current.toggle(e);
-                      }} >{tweet.profileName}</a>
+                    <Link to={"profile"}>
+                      <a href='/#' className='user-link' onMouseOver={
+                        (e) => {
+                          setSelectecUser(tweet);
+                          op.current.toggle(e);
+                        }} >{tweet.profileName}</a>
+                    </Link>
                     <span className='user-name gray-color'>{tweet.username}</span>
                     <span className="date gray-color">26 feb. 2023</span>
                   </div>
@@ -143,16 +132,13 @@ console.log("yes");
                     </div>
                     <div className="button save-button">
                       <FontAwesomeIcon icon={faBookmark} className='link-icon' />
-
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           })
         }
-
       </section>
       <OverlayPanel ref={op} className='overlayContent' onMouseLeave={handleMouseLeave}>
         <div className="profile-content">
@@ -160,13 +146,14 @@ console.log("yes");
             <div className="profile-image">
               <img src={selectedUser.profileImage} alt="" />
             </div>
+            <Link to={"profile"}>
             <h3>{selectedUser.profileName}</h3>
+            </Link>
             <span>{selectedUser.username}</span>
             <p>Lorem ipsum dolor sit</p>
           </div>
           <div className="follow-content">
             <button className='follow-button'>Seguir</button>
-
           </div>
         </div>
         <div className="following-content">

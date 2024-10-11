@@ -244,3 +244,7 @@ nav {
     fill: #1D9BF0;
     /* Cambia el color del texto */
 }
+a{
+    text-decoration: none;
+    color: white;
+}

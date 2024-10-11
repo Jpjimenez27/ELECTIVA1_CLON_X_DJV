@@ -9,19 +9,16 @@ export const ModalFollowed = ({ isOpen, closeModal }) => {
     setFollowed(followedData);
   }, []);
 
-
-
   return (
     <div className="modal-overlay">
       <div className="modal-content">
         <div className="text-followers">
           {"  "}
-          <h2>Who to followed</h2>{" "}
+          <h2>Seguidos</h2>{" "}
           <button className="close-button" onClick={closeModal}>
             X
           </button>
         </div>
-
         <ul className="followers-list">
           {followed.map((followed, index) => (
             <div key={index} className="follower-item">
@@ -30,7 +27,6 @@ export const ModalFollowed = ({ isOpen, closeModal }) => {
                 alt={followed.name}
                 className="follower-image"
               />
-
               <div className="follower-details">
                 <span className="follower-name">{followed.name}</span>
 
