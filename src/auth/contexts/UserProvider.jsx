@@ -18,9 +18,7 @@ export const UserProvider = ({ children }) => {
              uid: 1938393
             },
         };
-        
-        //localStorage.setItem('user', JSON.stringify(payload));
-      
+              
         dispatch(action);
     };
 

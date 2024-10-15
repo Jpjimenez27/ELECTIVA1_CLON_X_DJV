@@ -19,8 +19,6 @@ export const LoginModal = ({ isOpen, closeModal }) => {
 
   const { userState, loginUser, logoutUser } = useContext(UserContext);
 
-  //const { email, onInputChange } = useForm(initForm);
-
   const navigate = useNavigate();
 
   if (!isOpen) return null;
