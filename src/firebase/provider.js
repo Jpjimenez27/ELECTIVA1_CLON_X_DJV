@@ -13,6 +13,7 @@ export const useAuth = () => {
 export function AuthProvider ({children}) {
 
 const signup = (email, password) => 
+    
     createUserWithEmailAndPassword(FirebaseAuth, email, password);
 
 const login = (email, password) =>  

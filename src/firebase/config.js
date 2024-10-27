@@ -2,13 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth} from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAbwarFsosiT73YkJGb35A4g8NQMBJfA2E",
-  authDomain: "clonx-eb4ab.firebaseapp.com",
-  projectId: "clonx-eb4ab",
-  storageBucket: "clonx-eb4ab.appspot.com",
-  messagingSenderId: "356179660167",
-  appId: "1:356179660167:web:f0a6596c2b71de51349722",
-  measurementId: "G-KX75S6P569"
+  apiKey: "AIzaSyBIXkrvqy0Ll5lWx8Rrm_aah8hvnxyUeUc",
+  authDomain: "clonx-46235.firebaseapp.com",
+  projectId: "clonx-46235",
+  storageBucket: "clonx-46235.appspot.com",
+  messagingSenderId: "452975941188",
+  appId: "1:452975941188:web:8c693a9febfc8cb10ace11"
 };
 
 export const FirebaseApp = initializeApp(firebaseConfig);
