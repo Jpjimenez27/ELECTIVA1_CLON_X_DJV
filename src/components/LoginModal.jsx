@@ -2,10 +2,8 @@ import './modal.css';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { UserContext } from '../auth/contexts/UserContext';
-import { UserProvider } from '../auth/contexts/UserProvider';
-import { useForm } from '../hooks/UseForm';
-import { Navigate, replace, useNavigate } from 'react-router-dom';
-
+import {  useNavigate } from 'react-router-dom';
+import {loginUserWithEmail} from './../services/authService';
 
 const initForm = {
   email: '',
@@ -23,12 +21,14 @@ export const LoginModal = ({ isOpen, closeModal }) => {
 
   if (!isOpen) return null;
 
-  const onLogin = () => {
-
-    loginUser();
-    localStorage.setItem("email",email);
-    localStorage.setItem("password",password);
-    navigate("/home", { replace: true });
+  const onLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await loginUserWithEmail(email,password);
+       navigate("/home", { replace: true });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
 

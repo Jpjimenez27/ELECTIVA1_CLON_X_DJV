@@ -1,11 +1,9 @@
-
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { getUserIdByToken, validateToken } from './../services/authService';
 
 export const PrivateRouter = ({ children }) => {
 
-  const { pathname } = useLocation();
-  localStorage.setItem('lastPath', pathname);
-  const email = localStorage.getItem("email");
-  const password = localStorage.getItem("password");
-  return (email && password) ? children : <Navigate to="/" />
+  const isvalidToken = validateToken();
+ //getUserIdByToken();
+  return (isvalidToken) ? children : <Navigate to="/" />
 }

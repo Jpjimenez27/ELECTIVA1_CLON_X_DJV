@@ -7,8 +7,7 @@ export const SideBar = () => {
     const navigate = useNavigate();
 
     const logOut = () => {
-        localStorage.removeItem("email");
-        localStorage.removeItem("password");
+        localStorage.removeItem("token");
         navigate("/", { replace: true });
     }
 

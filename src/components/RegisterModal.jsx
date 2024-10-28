@@ -2,6 +2,9 @@ import './modal.css';
 
 
 export const RegisterModal = ({ isOpen, closeModal }) => {
+
+  
+
     return (
         <div className="modal-overlay">
           <div className="modal-content">
