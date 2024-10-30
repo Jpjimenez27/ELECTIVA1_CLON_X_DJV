@@ -7,21 +7,32 @@ import tweetsData from "../../json/tweets.json";
 import { OverlayPanel } from 'primereact/overlaypanel';
 import profilePhoto from './../../assets/images/santiagoPhoto.png'
 import { Link } from 'react-router-dom';
+import { addTweet, getTweets } from '../../services/tweetsService';
+import { getUserInformationById, getUserPictureById } from '../../services/usersService';
 export const TweetsList = () => {
   const op = useRef(null);
   const [tweets, setTweets] = useState([]);
   const [selectedUser, setSelectecUser] = useState({});
   const [newTweet, setNewTweet] = useState("");
-
+  const [userData, setUserData] = useState({});
   const [tweetsCounter, setTweetsCounter] = useState(1);
 
   useEffect(() => {
     getTweetsList();
+    getUserData();
   }, []);
 
-  const getTweetsList = () => {
-    setTweets(tweetsData);
+  const getTweetsList = async () => {
+    const response = await getTweets();
+    console.log(response);
+    setTweets(response);
+  }
 
+  const getUserData = async () => {
+    const response = await getUserInformationById();
+
+    //await getUserPictureById();
+    setUserData(response);
   }
 
   const handleMouseLeave = () => {
@@ -34,20 +45,22 @@ export const TweetsList = () => {
     setTweetsCounter(tweetsCounter + 1);
   }
 
-  const publishTweet = () => {
+  const publishTweet = async () => {
     if (newTweet.trim().length === 0 || newTweet.length >= 280) return;
-    const newPublishTweet = {
-      profileImage: profilePhoto,
-      profileName: "Santiago Osorio",
-      username: "@santiosiuwu",
-      content: newTweet,
-      comments: 0,
-      likes: 0,
-      retweets: 0,
-      views: 0
-    }
-    setTweets([newPublishTweet, ...tweets]);
+    // const newPublishTweet = {
+    //   profileImage: profilePhoto,
+    //   profileName: "Santiago Osorio",
+    //   username: "@santiosiuwu",
+    //   content: newTweet,
+    //   comments: 0,
+    //   likes: 0,
+    //   retweets: 0,
+    //   views: 0
+    // }
+    // setTweets([newPublishTweet, ...tweets]);
+    await addTweet(newTweet);
     setNewTweet("");
+
   }
 
   return (
@@ -55,7 +68,7 @@ export const TweetsList = () => {
       <section className="publish-tweet">
         <div className="text-content">
           <div className="profile-image">
-            <img src={profilePhoto} alt="" />
+            <img src={userData.urlPicture} alt="" />
           </div>
           <div className="publish-content">
             <textarea placeholder='¡¿Qué está pasando?!' rows={1} onChange={(e) => {
@@ -79,11 +92,11 @@ export const TweetsList = () => {
       <section className='tweets' style={{ height: '100%', overflowY: 'auto' }}>
         {
 
-          tweets.slice(0, tweetsCounter * 10).map((tweet, index) => {
-            return <div className="tweet" key={index}>
+          tweets.slice(0, tweetsCounter * 10).map((tweet) => {
+            return <div className="tweet" key={tweet.userId}>
               <div className="main-content-tweet">
                 <div className="tweet-image">
-                  <img src={tweet.profileImage} alt={tweet.username} className='tweet-profile-image' />
+                  <img src={tweet.user.urlPicture} alt={tweet.user.user} className='tweet-profile-image' />
                 </div>
                 <div className="texts">
                   <div className="titles">
@@ -92,7 +105,7 @@ export const TweetsList = () => {
                         (e) => {
                           setSelectecUser(tweet);
                           op.current.toggle(e);
-                        }} >{tweet.profileName}</span>
+                        }} >{tweet.user.name}</span>
                     </Link>
                     <span className='user-name gray-color'>{tweet.username}</span>
                     <span className="date gray-color">26 feb. 2023</span>
