@@ -1,12 +1,28 @@
+import './home.css'
 import logo from './../assets/images/twitter-logo.svg';
 import googleLogo from "./../assets/images/Google_logo.webp";
 import appleLogo from "./../assets/images/appleLogo.png";
-import './home.css'
 import { LoginModal } from '../components/LoginModal';
 import { useState } from 'react';
 import { RegisterModal } from '../components/RegisterModal';
+import { loginUserWithGoogle } from '../services/authService';
+import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
+
+  const navigate = useNavigate();
+
+  const onLoginWithGoogle = async (e) => {
+    e.preventDefault();
+    try {
+      debugger;
+      await loginUserWithGoogle();
+       navigate("/home", { replace: true });
+    } catch (error) {
+      console.log(error);
+     // alert("Correo o contraseña incorrecto");
+    }
+  };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRegOpen, setIsRegOpen] = useState(false);
@@ -26,15 +42,7 @@ export const Home = () => {
                   <div className="logo">
                     <img src={googleLogo} alt="" />
                   </div>
-                  <p>Registarse con Google</p>
-                </div>
-              </a>
-              <a className="white_button">
-                <div className="content">
-                  <div className="logo">
-                    <img src={appleLogo} alt="" />
-                  </div>
-                  <p className='apple_button_text'>Registarse con Apple</p>
+                  <p onClick={onLoginWithGoogle}>Iniciar sesión con Google</p>
                 </div>
               </a>
               <div className="separation">

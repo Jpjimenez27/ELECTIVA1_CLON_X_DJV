@@ -5,11 +5,6 @@ import { UserContext } from '../auth/contexts/UserContext';
 import {  useNavigate } from 'react-router-dom';
 import {loginUserWithEmail} from './../services/authService';
 
-const initForm = {
-  email: '',
-  password: ''
-};
-
 export const LoginModal = ({ isOpen, closeModal }) => {
 
   const [email,setEmail]=useState("");
@@ -28,10 +23,9 @@ export const LoginModal = ({ isOpen, closeModal }) => {
        navigate("/home", { replace: true });
     } catch (error) {
       console.log(error);
+     // alert("Correo o contraseña incorrecto");
     }
   };
-
-
 
   return (
     <>
@@ -42,7 +36,7 @@ export const LoginModal = ({ isOpen, closeModal }) => {
           <form onSubmit={onLogin} >
             <div className="input-group">
               <label htmlFor="email">Correo Electrónico</label>
-              <input type="email" id="email" placeholder="Ingresa tu correo"onChange={(e)=>setEmail(e.target.value)}  />
+              <input type="email" id="email" placeholder="Ingresa tu correo" onChange={(e)=>setEmail(e.target.value)}  />
             </div>
             <div className="input-group">
               <label htmlFor="password">Contraseña</label>
