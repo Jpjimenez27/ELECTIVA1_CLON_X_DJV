@@ -1,7 +1,7 @@
-import { addDoc, collection, getDocs, orderBy, query, where } from 'firebase/firestore';
+import { addDoc, collection, getDocs, orderBy, query, where, doc, getDoc, arrayUnion, updateDoc, arrayRemove } from 'firebase/firestore';
 import { db } from './../firebase/config';
 import { getUserIdByToken } from './authService';
-import { getUserInformationById } from './usersService';
+import { getUserInformationById, getUserInformationByUserId } from './usersService';
 
 export const addTweet = async (tweetContent) => {
 
@@ -12,12 +12,15 @@ export const addTweet = async (tweetContent) => {
             content: tweetContent,
             date: new Date(),
             user: await getUserInformationById(),
-            userId
+            userId,
+            likes: []
         });
     } catch (error) {
 
     }
 }
+
+
 
 export const getTweets = async () => {
     const userId = getUserIdByToken();
@@ -28,7 +31,41 @@ export const getTweets = async () => {
     );
     const querySnapshot = await getDocs(q);
     const tweetsList = querySnapshot.docs.map(tweet => ({ id: tweet.id, ...tweet.data() }));
-    return tweetsList;
 
+    const newt = await Promise.all(
+        tweetsList.map(async tweet => {
+            return {
+                ...tweet,
+                user: await getUserInformationByUserId(tweet.userId)
+            };
+        })
+    );
 
+    return newt;
+}
+
+export const addTweetLike = async (tweetId) => {
+
+    const userId = getUserIdByToken();
+    try {
+
+        const tweetRef = doc(db, "tweets", tweetId);
+        const tweetSnapshot = await getDoc(tweetRef);
+        const likesArray = tweetSnapshot.data().likes || [];
+        if (likesArray.includes(userId)) {
+
+            await updateDoc(tweetRef, {
+                likes: arrayRemove(userId)
+            });
+
+        } else {
+
+            await updateDoc(tweetRef, {
+                likes: arrayUnion(userId)
+            });
+
+        }
+    } catch (error) {
+        return error;
+    }
 }
