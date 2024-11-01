@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./profileView.css";
 import { ModalFollowed } from "../pages/components/ModalFollowed";
 import { ModalFollowers } from "../pages/components/ModalFollowers";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { faRetweet, faChartBar } from "@fortawesome/free-solid-svg-icons";
-import {  faHeart,  faMessage,  faBookmark,} from "@fortawesome/free-regular-svg-icons";
+import { faHeart, faMessage, faBookmark, } from "@fortawesome/free-regular-svg-icons";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  getUserInformationByUsername,  getUserInformationById,} from "../../services/usersService";
+import { followUser, getPeopleIFollow, getUserInformationByUsername } from "../../services/usersService";
 import { getUserInformationTweets } from "../../services/tweetsService";
+import { getUserIdByToken } from "../../services/authService";
 
 export const ProfileView = () => {
   const [profile, setProfile] = useState({});
@@ -18,44 +19,71 @@ export const ProfileView = () => {
   const [userData, setUserData] = useState({});
   const [tweetsCounter, setTweetsCounter] = useState(1);
   const { user } = useParams();
-
+  const [peopleIFollow, setPeopleIFollow] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     getUserData();
     getUserTweets();
+    ongetPeopleIFollow();
   }, []);
 
- 
+  const ongetPeopleIFollow = async () => {
+    const response = await getPeopleIFollow();
+    setPeopleIFollow(response);
 
-  useEffect(() => {}, [isFollowedOpen]);
+  }
+
+  const checkIFollowUser = () => {
+    return peopleIFollow.includes(userData.userId);
+  }
+
+  useEffect(() => { }, [isFollowedOpen]);
   const updatetweets = () => {
     setTweetsCounter(tweetsCounter + 1);
   };
 
   const getUserData = async () => {
-    const response = await getUserInformationByUsername(user);
-    console.log("response-->", response);
+    try {
+      const response = await getUserInformationByUsername(user);
+      setUserData(response);
+    } catch (error) {
+      navigate("/home", { replace: true });
+    }
 
-    setUserData(response);
   };
-
   const getUserTweets = async () => {
     const response = await getUserInformationTweets(user);
-    console.log("response-- Tweet>", response);
-
     setTweets(response);
   };
 
-  const returnFormattedDate = (date) => {
-    if (!date || typeof date.toDate !== "function") {
-      return "Loading";
+
+  const returnFormattedDate = (tweetDate) => {
+    if (!tweetDate) {
+      return "";
     }
+    const newDate = tweetDate.toDate();
+    
+    const options = {
+      day: 'numeric',
+      month: 'short', // "short" muestra el mes como una abreviatura, como "Nov."
+      year: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true // Esto hace que la hora se muestre en formato de 12 horas (AM/PM)
+    };
 
-    const newDate = date.toDate();
-    return `${newDate.getDate()}-${
-      newDate.getMonth() + 1
-    }-${newDate.getFullYear()}`;
+    return newDate.toLocaleString('es-ES', options);
   };
+  const onFollowUser = async (userId) => {
 
+    await followUser(userId);
+    await getUserData();
+    await ongetPeopleIFollow();
+  }
+
+  const checkItsMyProfile = () => {
+    return userData.userId === getUserIdByToken();
+  }
   return (
     <>
       {userData != undefined ? (
@@ -107,7 +135,7 @@ export const ProfileView = () => {
 
           <div className="follow-info">
             <a onClick={() => setIsFollowedOpen(true)} className="following">
-              {profile.following}4.564 Seguidos
+              {userData.following?.length} Seguidos
               {isFollowedOpen ? (
                 <ModalFollowed
                   isOpen={isFollowedOpen}
@@ -116,6 +144,7 @@ export const ProfileView = () => {
                       setIsFollowedOpen(false);
                     }, 1);
                   }}
+                  user={user}
                 />
               ) : (
                 <></>
@@ -133,11 +162,17 @@ export const ProfileView = () => {
                       setIsFollowersOpen(false);
                     }, 1);
                   }}
+                  user={user}
                 />
               ) : (
                 <></>
               )}
             </a>
+            {
+              !checkItsMyProfile() ? checkIFollowUser() ? <button className='follow-button' onClick={() => onFollowUser(userData.userId)}>Dejar de seguir</button> :
+                <button className='follow-button' onClick={() => onFollowUser(userData.userId)}>Seguir</button> : <div></div>
+            }
+
           </div>
           <div className="posts-count">
             {" "}
@@ -150,8 +185,8 @@ export const ProfileView = () => {
         className="tweets tweets-profile"
         style={{ height: "100%", overflowY: "auto" }}
       >
-        { tweets.slice(0, tweetsCounter * 10).map((userTweets) => (
-          <div className="tweet" key={userTweets.user}>
+        {tweets.slice(0, tweetsCounter * 10).map((userTweets) => (
+          <div className="tweet" key={userTweets.id}>
             <div className="main-content-tweet">
               <div className="tweet-image">
                 <img
@@ -163,7 +198,7 @@ export const ProfileView = () => {
               <div className="texts">
                 <div className="titles">
                   <span className="user-link">{userTweets.user.name}</span>
-                   <div className="user-tweet"> @{userData.user}</div>
+                  <div className="user-tweet"> @{userData.user}</div>
                   <span className="date gray-color">
                     {returnFormattedDate(userTweets.date)}
                   </span>

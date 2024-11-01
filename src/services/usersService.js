@@ -1,13 +1,12 @@
-import { addDoc, arrayRemove, arrayUnion, collection, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
-import FirebaseApp, { db } from './../firebase/config';
+import {arrayRemove, arrayUnion, collection,  getDocs, query, updateDoc, where } from 'firebase/firestore';
+import  { db } from './../firebase/config';
 import { getUserIdByToken } from './authService';
-import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 
 
 
 export const getUserInformationById = async () => {
 
-    const userId = getUserIdByToken();
+    const userId =await getUserIdByToken();
     try {
         const q = query(collection(db, "users"), where("userId", "==", userId));
         const querySnapshot = await getDocs(q);
@@ -19,12 +18,21 @@ export const getUserInformationById = async () => {
         throw error
     }
 }
-export const getUserPictureById = async () => {
-    const storage = getStorage(FirebaseApp);
-    const imageRef = ref(storage, 'imagen_2024-10-29_205721981.png');
-    const url = await getDownloadURL(imageRef);
-}
 
+
+export const getAllUsers = async () => {
+
+    try {
+        const q = query(collection(db, "users"));
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+            let followersData = querySnapshot.docs.map(tweet => ({ id: tweet.id, ...tweet.data() }));
+            return followersData;
+        }
+    } catch (error) {
+        throw error
+    }
+}
 export const followUser = async (userId) => {
     try {
 
@@ -59,16 +67,34 @@ export const followUser = async (userId) => {
                 following: arrayUnion(userId)
             });
         }
-        }catch(error){
+    } catch (error) {
 
-        }
-    
     }
+
+}
 export const getUserInformationByUsername = async (user) => {
 
- 
+
     try {
         const q = query(collection(db, "users"), where("user", "==", user));
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+            const userData = querySnapshot.docs[0].data();
+            return userData;
+        }else{
+            throw new Error("not exists");
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+
+export const getUserInformationByEmail = async (email) => {
+
+
+    try {
+        const q = query(collection(db, "users"), where("email", "==", email));
         const querySnapshot = await getDocs(q);
         if (!querySnapshot.empty) {
             const userData = querySnapshot.docs[0].data();
@@ -78,7 +104,6 @@ export const getUserInformationByUsername = async (user) => {
         throw error;
     }
 }
-
 
 export const getUserInformationByUserId = async (userId) => {
 
@@ -103,10 +128,32 @@ export const getPeopleIFollow = async () => {
         const q = query(collection(db, "users"), where("userId", "==", myUserId));
         const querySnapshot = await getDocs(q);
         if (!querySnapshot.empty) {
-            const following = querySnapshot.docs[0].data().following ;
+            const following = querySnapshot.docs[0].data().following;
             return following;
         }
     } catch (error) {
         throw error
     }
 };
+
+
+export const getUsersFollowers = async (userName) => {
+
+    const user = await getUserInformationByUsername(userName);
+    const followers = user.followers;
+    const q = query(collection(db, "users"), where("userId", "in", followers));
+    const querySnapshot = await getDocs(q);
+    let followersData = querySnapshot.docs.map(tweet => ({ id: tweet.id, ...tweet.data() }));
+    return followersData;
+}
+
+
+export const getUsersFollowing = async (userName) => {
+
+    const user = await getUserInformationByUsername(userName);
+    const following = user.following;
+    const q = query(collection(db, "users"), where("userId", "in", following));
+    const querySnapshot = await getDocs(q);
+    let followersData = querySnapshot.docs.map(tweet => ({ id: tweet.id, ...tweet.data() }));
+    return followersData;
+}

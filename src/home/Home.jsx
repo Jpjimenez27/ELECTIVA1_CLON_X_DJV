@@ -7,19 +7,24 @@ import { useState } from 'react';
 import { RegisterModal } from '../components/RegisterModal';
 import { loginUserWithGoogle } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
+import { CompleteInfoModal } from '../components/CompleteInfoModal';
 
 export const Home = () => {
 
   const navigate = useNavigate();
-
+  const [isCompleteOpen, setIsCompleteOpen] = useState(false);
   const onLoginWithGoogle = async (e) => {
     e.preventDefault();
     try {
-      debugger;
+    
       await loginUserWithGoogle();
        navigate("/home", { replace: true });
     } catch (error) {
-      console.log(error);
+    
+     const errorMesaage=error.message;
+     if(errorMesaage==="incomplete"){
+      setIsCompleteOpen(true);
+     }
      // alert("Correo o contraseña incorrecto");
     }
   };
@@ -63,7 +68,7 @@ export const Home = () => {
               </div>
             </div>
           </div>
-
+          {isCompleteOpen ? <CompleteInfoModal isOpen={isCompleteOpen} closeModal={() => setIsCompleteOpen(false)} /> : <></>}
         </div>
         <footer className="footer">
 

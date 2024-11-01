@@ -15,7 +15,7 @@
   border-bottom: 1px solid #b5aeae;
 }
 
-.user-tweet{
+.user-tweet {
   color: #1DA1F2;
   margin-right: 10px;
   font-size: 13px;
@@ -156,6 +156,7 @@ a {
   display: flex;
   margin-top: 15px;
   padding: 10px;
+  align-items: center;
 }
 
 .follow-info a {
@@ -171,8 +172,6 @@ a {
 }
 
 .tweets-profile {
-  width: 642px;
-}
-.h3-profile{
+  width: 67%;
 
 }

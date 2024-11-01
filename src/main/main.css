@@ -264,3 +264,20 @@ a {
         background-color: #080808;
     }
 }
+
+ul{
+    background-color: black !important;
+    list-style: none;
+    .user-info{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        img{
+            border-radius: 50%;
+        }
+&:hover{
+    background-color: rgb(53, 53, 53);
+}
+       
+    }
+}

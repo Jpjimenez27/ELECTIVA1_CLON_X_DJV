@@ -4,11 +4,11 @@ import { faHeart, faMessage, faBookmark } from '@fortawesome/free-regular-svg-ic
 import { useEffect, useState, useRef } from 'react';
 import { Toast } from 'primereact/toast';
 import { OverlayPanel } from 'primereact/overlaypanel';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { addTweet, addTweetLike, getTweets } from '../../services/tweetsService';
-import { followUser, getPeopleIFollow} from '../../services/usersService';
+import { followUser, getAllUsers, getPeopleIFollow } from '../../services/usersService';
 import { getUserIdByToken } from '../../services/authService';
-import { getUserInformationById, getUserPictureById } from '../../services/usersService';
+import { getUserInformationById } from '../../services/usersService';
 
 export const TweetsList = () => {
   const op = useRef(null);
@@ -18,22 +18,43 @@ export const TweetsList = () => {
   const [userData, setUserData] = useState({});
   const [tweetsCounter, setTweetsCounter] = useState(1);
   const [followingUsers, setFollowingUsers] = useState([]);
+  const [query, setQuery] = useState('');
+  const [users, setUsers] = useState([]);
+  const [usersFilter, setUsersFilter] = useState([]);
   const toast = useRef(null);
+  const navigate = useNavigate();
+
   useEffect(() => {
-    getTweetsList();
     getUserData();
+    getTweetsList();
     onGetPopleIFollow();
+    onGetAllUsers();
   }, []);
 
   const getTweetsList = async () => {
     const response = await getTweets();
-    console.log(response);
+
     setTweets(response);
   }
 
   const getUserData = async () => {
-    const response = await getUserInformationById();
-    setUserData(response);
+    try {
+      const response = await getUserInformationById();
+      if (response == null) {
+        localStorage.removeItem("token");
+        navigate("/", { replace: true });
+      }
+      setUserData(response);
+    } catch (error) {
+
+    }
+
+  }
+
+  const onGetAllUsers = async () => {
+    const response = await getAllUsers();
+    setUsers(response);
+    console.log(response);
   }
 
   const handleMouseLeave = () => {
@@ -56,7 +77,6 @@ export const TweetsList = () => {
   }
 
   const onFollowUser = async (userId) => {
-    console.log(selectedUser);
 
     await followUser(userId);
     await getTweetsList();
@@ -64,11 +84,18 @@ export const TweetsList = () => {
   }
 
   const returnFormattedDate = (tweetDate) => {
-
-
     const newDate = tweetDate.toDate();
-    return `${newDate.getDate()}-${newDate.getMonth() + 1}-${newDate.getFullYear()}`;
-  }
+    const options = {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
+    };
+
+    return newDate.toLocaleString('es-ES', options);
+  };
 
   const onAddTweetLike = async (tweetId) => {
 
@@ -80,31 +107,58 @@ export const TweetsList = () => {
     }
   }
 
-  const checkIlikedTweet = (likes) => {
-    if (!likes) {
-      likes = [];
-    }
-    const userId = getUserIdByToken();
+  const checkIlikedTweet = async (likes) => {
+    const userId = await getUserIdByToken();
     return likes.includes(userId);
   }
 
-  const onGetPopleIFollow=async ()=>{
-   const response= await getPeopleIFollow();
-   setFollowingUsers(response);
-   console.log("---->",followingUsers);
-   
+  const onGetPopleIFollow = async () => {
+    const response = await getPeopleIFollow();
+    setFollowingUsers(response);
   }
 
- const  checkIFollowUser=(userId)=>{
-  if(!followingUsers){
-    followingUsers=[];
-  }
-  return followingUsers.includes(userId);
- }
+  const checkIFollowUser = (userId) => {
 
+    return followingUsers.includes(userId);
+  }
+  const filterUsers = () => {
+    setUsersFilter(users.filter(x => x.name.toLowerCase().includes(query.toLowerCase())||x.user.toLowerCase().includes(query.toLowerCase())));
+  };
   return (
-    <>
+    <div>
       <Toast ref={toast} />
+      <div style={{ position: 'relative', width: '100%' }}>
+        <input
+          type="text"
+          value={query}
+          onInput={(e) => {
+            setQuery(e.target.value)
+            filterUsers();
+          }}
+          // onChange={handleInputChange}
+          placeholder="Buscar..."
+        />
+        {query.length > 0 && (
+          <ul style={styles.dropdown}>
+            {usersFilter.map((user, index) => (
+              <Link to={"/home/user/" + user.user}>
+                <li style={styles.option}
+
+                  key={index}>
+                  <div className="user-info">
+                    <img src={user.urlPicture} alt="" width={'30px'} />
+                    <p>{user.name}</p>
+                    <p>@{user.user}</p>
+
+                  </div>
+
+
+                </li>
+              </Link>
+            ))}
+          </ul>
+        )}
+      </div>
       <section className="publish-tweet">
         <div className="text-content">
           <div className="profile-image">
@@ -194,8 +248,8 @@ export const TweetsList = () => {
           </div>
           <div className="follow-content">
             {
-             !checkIFollowUser(selectedUser?.userId)? <button className='follow-button' onClick={()=>onFollowUser(selectedUser?.userId)}>Seguir</button>
-            :<button className='follow-button' onClick={()=>onFollowUser(selectedUser?.userId)}>Dejar de seguir</button>
+              !checkIFollowUser(selectedUser?.userId) ? <button className='follow-button' onClick={() => onFollowUser(selectedUser?.userId)}>Seguir</button>
+                : <button className='follow-button' onClick={() => onFollowUser(selectedUser?.userId)}>Dejar de seguir</button>
             }
           </div>
         </div>
@@ -204,6 +258,31 @@ export const TweetsList = () => {
           <p><span>{selectedUser?.user?.followers?.length} </span>Seguidores</p>
         </div>
       </OverlayPanel>
-    </>
+    </div>
   )
 }
+const styles = {
+  dropdown: {
+    position: 'absolute',
+    top: '100%',
+    left: 0,
+    right: 0,
+    backgroundColor: '#fff',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    zIndex: 1000,
+    marginTop: '5px',
+    maxHeight: '150px',
+    overflowY: 'auto',
+  },
+  ul: {
+    backgroundColor: "#000000"
+  },
+  option: {
+    padding: '8px',
+    cursor: 'pointer',
+    backgroundColor: "#000",
+    color: "white"
+  },
+};

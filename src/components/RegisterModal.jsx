@@ -41,16 +41,11 @@ export const RegisterModal = ({ isOpen, closeModal }) => {
     try {
 
       await registerUserWithEmail(email, password, user);
-
-      const userId = getUserIdByToken();
+      const userId =await getUserIdByToken();
       const URL = await uploadFileAndGetURL(profileImage);
-
-      navigate("/home", { replace: true });
-
+    
       await addUser(name, user, userId, email, birthdate, URL);
-
-      console.log(name, user, userId, email, password, birthdate, URL);
-
+      navigate("/home", { replace: true });
     } catch (error) {
       console.error("Error durante el registro:", error.message);
     }

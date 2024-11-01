@@ -5,7 +5,7 @@ import { getUserInformationById, getUserInformationByUserId } from './usersServi
 
 export const addTweet = async (tweetContent) => {
 
-    const userId = getUserIdByToken();
+    const userId =await getUserIdByToken();
     try {
 
         await addDoc(collection(db, "tweets"), {
@@ -23,7 +23,8 @@ export const addTweet = async (tweetContent) => {
 
 
 export const getTweets = async () => {
-    const userId = getUserIdByToken();
+    const userId =await getUserIdByToken();
+
     const q = query(
         collection(db, "tweets"),
         where("userId", "!=", userId),
@@ -46,7 +47,7 @@ export const getTweets = async () => {
 
 export const addTweetLike = async (tweetId) => {
 
-    const userId = getUserIdByToken();
+    const userId =await getUserIdByToken();
     try {
 
         const tweetRef = doc(db, "tweets", tweetId);

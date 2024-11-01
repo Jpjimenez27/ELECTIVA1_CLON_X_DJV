@@ -22,7 +22,7 @@ export const LoginModal = ({ isOpen, closeModal }) => {
       await loginUserWithEmail(email,password);
        navigate("/home", { replace: true });
     } catch (error) {
-      console.log(error);
+      
      // alert("Correo o contraseña incorrecto");
     }
   };

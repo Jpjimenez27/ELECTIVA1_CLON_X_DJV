@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndP
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { jwtDecode } from "jwt-decode";
 import { v4 } from 'uuid';
+import { getUserInformationByEmail } from './usersService';
 
 export const registerUserWithEmail = async (email, password, user) => {
 
@@ -21,7 +22,7 @@ export const registerUserWithEmail = async (email, password, user) => {
         const userCredential = await createUserWithEmailAndPassword(FirebaseAuth, email, password);
         const token = await userCredential.user.getIdToken();
         localStorage.setItem("token", token);
-        console.log("Usuario registrado con éxito");
+       
 
     } catch (error) {
         alert("Error al registrar usuario: ", error);
@@ -34,10 +35,10 @@ export async function uploadFileAndGetURL(file) {
 
     try {
         const snapshot = await uploadBytes(storageRef, file);
-        console.log("Archivo subido con éxito:", snapshot);
+       
 
         const downloadURL = await getDownloadURL(storageRef);
-        //console.log("URL:", downloadURL);
+     
 
         return downloadURL;
     } catch (error) {
@@ -59,9 +60,9 @@ export const addUser = async (name, user, userId, email, birthdate, URL) => {
             followers: [],
             following: []
         });
-        console.log("Usuario agregado exitosamente a Firestore");
+       
     } catch (error) {
-        console.error("Error al agregar usuario a Firestore:", error.message);
+        
     }
 };
 
@@ -70,9 +71,9 @@ export const loginUserWithGoogle = async () => {
     try {
 
         const result = await signInWithPopup(FirebaseAuth, Google);
-        
+
         if (!result) {
-            throw new Error("No se obtuvo un resultado de autenticación.");
+            throw new Error("notRegistered");
         }
 
         const user = result.user;
@@ -81,24 +82,65 @@ export const loginUserWithGoogle = async () => {
         }
 
         const email = user.email;
-        
-        const usersRef = collection(db, "users"); 
+
+        const usersRef = collection(db, "users");
         const q = query(usersRef, where("email", "==", email));
         const querySnapshot = await getDocs(q);
 
         if (querySnapshot.empty) {
-            alert("El correo no está registrado en la aplicación.");
-            return;
-        } else {
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
+            const token = result.user.accessToken;
+            
             localStorage.setItem("token", token);
-            console.log("Inicio de sesión exitoso", token);
+            throw new Error("incomplete");
+        } else {
+            const token = result.user.accessToken;
+            localStorage.setItem("token", token);
+
         }
 
     } catch (error) {
         console.error("Error en el inicio de sesión:", error.message);
-        throw error; 
+        throw error;
+    }
+};
+
+export const completeUserInfo = async (name, user, birthdate, URL) => {
+    try {
+        if (!name) {
+            throw new Error("El Nombre es requerido");
+        }
+        if (!user) {
+            throw new Error("El usuario es requerido");
+        }
+
+        if (!birthdate) {
+            throw new Error("La fecha de nacimiento es requerido");
+        }
+
+        const userId = await getUserIdByToken();
+        const email = await getUserEmailByToken();
+        const usersRef = collection(db, "users");
+        const q = query(usersRef, where("user", "==", user));
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+            throw new Error("El usuario está repetido");
+        };
+        
+        await addDoc(collection(db, "users"), {
+            date: new Date(),
+            name: name,
+            user: user,
+            userId: userId,
+            email: email,
+            birthdate: birthdate,
+            urlPicture: URL,
+            followers: [],
+            following: []
+        });
+
+    } catch (error) {
+
+        throw error;
     }
 };
 
@@ -107,7 +149,7 @@ export const loginUserWithEmail = async (email, password) => {
     try {
 
         const userCredentials = await signInWithEmailAndPassword(FirebaseAuth, email, password);
-        console.log(userCredentials);
+      
         const token = await userCredentials.user.getIdToken();
         localStorage.setItem("token", token);
     } catch (error) {
@@ -128,10 +170,26 @@ export const validateToken = () => {
 export const getUserIdByToken = () => {
 
     try {
+
         const token = localStorage.getItem("token");
         const tokenData = jwtDecode(token);
+
         const { user_id } = tokenData;
         return user_id;
+    } catch (error) {
+        localStorage.removeItem("token");
+        window.location.href = "/";
+    }
+}
+
+export const getUserEmailByToken = () => {
+    try {
+
+        const token = localStorage.getItem("token");
+        const tokenData = jwtDecode(token);
+
+        const { email } = tokenData;
+        return email;
     } catch (error) {
         localStorage.removeItem("token");
         window.location.href = "/";

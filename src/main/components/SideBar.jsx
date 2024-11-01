@@ -2,6 +2,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faBell, faUsers, faUser, faMagnifyingGlass, faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom'
 import twitterLogo from './../../assets/images/twitter-logo.svg';
+import { getUserInformationById } from '../../services/usersService';
+import { useEffect } from 'react';
+
 export const SideBar = () => {
 
     const navigate = useNavigate();
@@ -10,6 +13,12 @@ export const SideBar = () => {
         localStorage.removeItem("token");
         navigate("/", { replace: true });
     }
+
+    const onGoProfile = async () => {
+        const user = await getUserInformationById();
+    
+        navigate("/home/user/"+user.user, { replace: true });
+    };
 
     return (
         <nav className='nav'>
@@ -40,11 +49,11 @@ export const SideBar = () => {
                     <FontAwesomeIcon icon={faUsers} className='link-icon' />
                     <span >Comunidades</span>
                 </div>
-                <div className='link'>
-                    <Link to={"profile"}>
-                        <FontAwesomeIcon icon={faUser} className='link-icon' />
-                        <span>Perfil</span>
-                    </Link>
+                <div className='link' >
+
+                    <FontAwesomeIcon icon={faUser} className='link-icon' onClick={() => onGoProfile()} />
+                    <span onClick={() => onGoProfile()}>Perfil</span>
+
                 </div>
                 <div className='link' onClick={logOut}>
                     <FontAwesomeIcon icon={faPowerOff} className='link-icon' />
