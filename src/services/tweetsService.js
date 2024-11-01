@@ -75,12 +75,13 @@ export const getUserInformationTweets = async (user) => {
     try {
         const q = query(
             collection(db, "tweets"),
-            where("user.user", "==", user),
-            // orderBy("date", "desc")
+            where("user.user", "==", user)
         );
         const querySnapshot = await getDocs(q);
-        const userTweets = querySnapshot.docs.map(tweet => ({ id: tweet.id, ...tweet.data() }));
-        return userTweets || [];
+        const tweetsList = querySnapshot.docs
+            .map(tweet => ({ id: tweet.id, ...tweet.data() }))
+            .sort((a, b) => b.date - a.date);
+        return tweetsList || [];
     } catch (error) {
         console.error(error);
         throw error;
