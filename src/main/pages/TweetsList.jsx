@@ -1,4 +1,3 @@
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRetweet, faChartBar, faImage, faFileImage, faPoll, faSmile, faCalendarAlt, faMapMarkerAlt, faHeart as heartSolid } from '@fortawesome/free-solid-svg-icons';
 import { faHeart, faMessage, faBookmark } from '@fortawesome/free-regular-svg-icons';
@@ -7,8 +6,10 @@ import { Toast } from 'primereact/toast';
 import { OverlayPanel } from 'primereact/overlaypanel';
 import { Link } from 'react-router-dom';
 import { addTweet, addTweetLike, getTweets } from '../../services/tweetsService';
-import { followUser, getPeopleIFollow, getUserInformationById, getUserPictureById } from '../../services/usersService';
+import { followUser, getPeopleIFollow} from '../../services/usersService';
 import { getUserIdByToken } from '../../services/authService';
+import { getUserInformationById, getUserPictureById } from '../../services/usersService';
+
 export const TweetsList = () => {
   const op = useRef(null);
   const [tweets, setTweets] = useState([]);

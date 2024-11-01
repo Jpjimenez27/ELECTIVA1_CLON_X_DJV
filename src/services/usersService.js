@@ -4,6 +4,7 @@ import { getUserIdByToken } from './authService';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 
 
+
 export const getUserInformationById = async () => {
 
     const userId = getUserIdByToken();
@@ -58,6 +59,21 @@ export const followUser = async (userId) => {
                 following: arrayUnion(userId)
             });
         }
+        }catch(error){
+
+        }
+    
+    }
+export const getUserInformationByUsername = async (user) => {
+
+ 
+    try {
+        const q = query(collection(db, "users"), where("user", "==", user));
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+            const userData = querySnapshot.docs[0].data();
+            return userData;
+        }
     } catch (error) {
         throw error;
     }
@@ -93,4 +109,4 @@ export const getPeopleIFollow = async () => {
     } catch (error) {
         throw error
     }
-}
+};

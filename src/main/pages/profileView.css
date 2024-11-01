@@ -15,6 +15,13 @@
   border-bottom: 1px solid #b5aeae;
 }
 
+.user-tweet{
+  color: #1DA1F2;
+  margin-right: 10px;
+  font-size: 13px;
+  margin-top: 3px;
+}
+
 
 .profile-container {
   font-family: Arial, sans-serif;
@@ -126,6 +133,7 @@ a {
 .additional-info {
   margin-top: 10px;
   font-size: 0.8rem;
+  margin-top: 5%;
 
 }
 
@@ -164,4 +172,7 @@ a {
 
 .tweets-profile {
   width: 642px;
+}
+.h3-profile{
+
 }
