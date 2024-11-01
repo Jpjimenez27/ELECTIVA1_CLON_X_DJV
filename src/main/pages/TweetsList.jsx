@@ -1,14 +1,12 @@
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRetweet, faChartBar, faImage, faFileImage, faPoll, faSmile, faCalendarAlt, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { faHeart, faMessage, faBookmark } from '@fortawesome/free-regular-svg-icons';
 import { useEffect, useState, useRef } from 'react';
-import tweetsData from "../../json/tweets.json";
 import { OverlayPanel } from 'primereact/overlaypanel';
-import profilePhoto from './../../assets/images/santiagoPhoto.png'
 import { Link } from 'react-router-dom';
 import { addTweet, getTweets } from '../../services/tweetsService';
 import { getUserInformationById, getUserPictureById } from '../../services/usersService';
+
 export const TweetsList = () => {
   const op = useRef(null);
   const [tweets, setTweets] = useState([]);
@@ -100,7 +98,7 @@ export const TweetsList = () => {
                 </div>
                 <div className="texts">
                   <div className="titles">
-                    <Link to={`user/${tweet.username}`}>
+                    <Link to={`user/${tweet.user.user}`}>
                       <span className='user-link' onMouseOver={
                         (e) => {
                           setSelectecUser(tweet);
@@ -108,7 +106,7 @@ export const TweetsList = () => {
                         }} >{tweet.user.name}</span>
                     </Link>
                     <span className='user-name gray-color'>{tweet.username}</span>
-                    <span className="date gray-color">26 feb. 2023</span>
+                    <span className="date gray-color"></span> 
                   </div>
                   <p className='tweet-content'>{tweet.content}</p>
                   <div className="buttons">
@@ -122,7 +120,7 @@ export const TweetsList = () => {
                     </div>
                     <div className="button heart-button">
                       <FontAwesomeIcon icon={faHeart} className='link-icon' />
-                      <span>{tweet.likes}</span>
+                      <span>{tweet.likes.length}</span>
                     </div>
                     <div className="button view-button">
                       <FontAwesomeIcon icon={faChartBar} className='link-icon' />

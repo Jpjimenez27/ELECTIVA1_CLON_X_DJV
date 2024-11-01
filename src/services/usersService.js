@@ -4,6 +4,7 @@ import { getUserIdByToken } from './authService';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 
 
+
 export const getUserInformationById = async () => {
 
     const userId = getUserIdByToken();
@@ -23,3 +24,18 @@ export const getUserPictureById=async()=>{
     const imageRef = ref(storage, 'imagen_2024-10-29_205721981.png');
     const url = await getDownloadURL(imageRef); 
 }
+
+export const getUserInformationByUsername = async (user) => {
+
+ 
+    try {
+        const q = query(collection(db, "users"), where("user", "==", user));
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+            const userData = querySnapshot.docs[0].data();
+            return userData;
+        }
+    } catch (error) {
+        throw error;
+    }
+};
